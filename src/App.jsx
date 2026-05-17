@@ -91,7 +91,7 @@ function Header({ currentPage, setCurrentPage }) {
         <button onClick={() => setCurrentPage("home")} className="group flex items-center gap-4">
           <div className="overflow-hidden rounded-full border-2 border-white bg-white shadow-lg shadow-white/10 transition group-hover:scale-105">
   <img
-    src="public/logo.gif"
+    src="/logo.gif"
     alt="Makeshift Creations Co. logo"
     className="h-14 w-14 object-contain p-1"
   />
