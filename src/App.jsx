@@ -95,12 +95,12 @@ function Header({ currentPage, setCurrentPage }) {
             <img
               src={logoData}
               alt="Makeshift Creations Co. logo"
-              className="h-14 w-14 object-contain p-1"
+              className="h-20 w-20 object-contain p-1"
             />
           </div>
           <div>
-            <p className="text-lg font-black tracking-tight text-white">Makeshift</p>
-            <p className="-mt-1 text-xs uppercase tracking-[0.28em] text-white/55">Creations Co.</p>
+            <p className="text-x1 font-black tracking-tight text-white">Makeshift</p>
+            <p className="-mt-1 text-sm uppercase tracking-[0.32em] text-white/55">Creations Co.</p>
           </div>
         </button>
 
