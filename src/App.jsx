@@ -16,6 +16,7 @@ import {
   Lightbulb,
   Package,
   Star,
+  ScanLine,
 } from "lucide-react";
 
 const navItems = [
@@ -80,6 +81,11 @@ const services = [
     icon: Shirt,
     text: "Custom shirts for events, gifts, teams, and everyday wear using heat-transfer vinyl.",
   },
+  {
+    title: "Laser Engraving & Cutting",
+    icon: ScanLine,
+    text: "Precision laser engraving and cutting for wood, acrylic, leather, slate, custom signage, gifts, and small business branding.",
+  },
 ];
 
 function Header({ currentPage, setCurrentPage }) {
@@ -87,32 +93,26 @@ function Header({ currentPage, setCurrentPage }) {
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-neutral-950/85 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-        <button onClick={() => setCurrentPage("home")} className="group flex items-center gap-4">
-          <div className="overflow-hidden rounded-sm border-2 border-white bg-white shadow-lg shadow-white/10 transition group-hover:bg-white/90">
-            <img
-              src="/logo.gif"
-              alt="Makeshift Creations Co. logo"
-              className="h-14 w-14 object-contain p-1"
-            />
-          </div>
-          <div>
-            <p className="text-lg font-black tracking-tight text-white">Makeshift</p>
-            <p className="-mt-1 text-xs uppercase tracking-[0.28em] text-white/55">Creations Co.</p>
+      <div className="mx-auto flex max-w-7xl items-end justify-between px-5 pt-4 pb-2">
+        <button onClick={() => setCurrentPage("home")} className="group flex items-center">
+          <div className="text-left leading-none text-white transition group-hover:text-white/80">
+            <p className="text-5xl font-black tracking-tight">Makeshift</p>
+            <p className="text-5xl font-black tracking-tight">Creations</p>
+            <p className="text-4xl font-black tracking-tight text-white">Co.</p>
           </div>
         </button>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-end gap-12 self-end pb-2 md:flex">
           {navItems.map((item) => (
             <button
               key={item.label}
               onClick={() => setCurrentPage(item.page)}
-              className={`text-sm font-medium transition hover:text-white ${currentPage === item.page ? "text-white" : "text-white/70"}`}
+              className={`text-3xl font-medium transition hover:text-white ${currentPage === item.page ? "text-white" : "text-white/70"}`}
             >
               {item.label}
             </button>
           ))}
-          <button onClick={() => setCurrentPage("contact")} className="rounded-sm bg-white px-5 py-2 text-sm font-bold text-neutral-950 transition hover:bg-white/90">
+          <button onClick={() => setCurrentPage("contact")} className="rounded-sm bg-white px-8 py-4 text-2xl font-bold text-neutral-950 transition hover:bg-white/90">
             Get a Quote
           </button>
         </nav>
@@ -169,8 +169,8 @@ function App() {
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-sm border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
-              <Sparkles size={16} /> Handmade goods. Custom work. Built with personality.
+            <div className="mb-6 inline-flex items-center gap-3 rounded-sm border border-white/10 bg-white/5 px-6 py-3 text-xl font-medium text-white">
+              <Sparkles size={24} /> Handmade goods. Custom work. Built with personality.
             </div>
             <h1 className="text-5xl font-black leading-[0.95] tracking-tight md:text-7xl">
               Create. Customize. <span className="text-white/55">Inspire.</span>
@@ -235,78 +235,133 @@ function App() {
       )}
 
       {currentPage === "creations" && (
-      <section id="creations" className="border-t border-white/10 px-5 py-24">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader eyebrow="Creations" title="Functional design, made to organize." text="Thoughtfully designed organizers, trays, accessories, storage pieces, LED lights, and seasonal goods made in small batches." />
+        <section id="creations" className="border-t border-white/10 px-5 py-24">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeader
+              eyebrow="Creations"
+              title="Functional design, made to organize."
+              text="Thoughtfully designed organizers, trays, accessories, storage pieces, LED lights, and seasonal goods made in small batches."
+            />
 
-          <div className="grid gap-5 md:grid-cols-3">
-            {bestSellers.map((item) => (
-              <div key={item.name} className="group rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:bg-white/[0.07]">
-                <div className="mb-6 overflow-hidden rounded-sm border border-white/10 bg-neutral-900">
-                  <div className="flex h-52 items-center justify-center bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
-                    {item.name === "HoneyComb Tray" && (
-                      <div className="relative flex h-32 w-32 items-center justify-center border-[8px] border-amber-800 bg-amber-700 shadow-2xl">
-                        <div className="grid grid-cols-4 gap-1">
-                          {Array.from({ length: 16 }).map((_, i) => (
-                            <div key={i} className="h-4 w-4 bg-amber-200" />
-                          ))}
+            <div className="grid gap-5 md:grid-cols-3">
+              {bestSellers.map((item) => (
+                <div
+                  key={item.name}
+                  className="group rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:bg-white/[0.07]"
+                >
+                  <div className="mb-6 overflow-hidden rounded-sm border border-white/10 bg-neutral-900">
+                    <div className="flex h-52 items-center justify-center bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
+                      {item.name === "HoneyComb Tray" && (
+                        <div className="relative flex h-32 w-32 items-center justify-center border-[8px] border-amber-800 bg-amber-700 shadow-2xl">
+                          <div className="grid grid-cols-4 gap-1">
+                            {Array.from({ length: 16 }).map((_, i) => (
+                              <div key={i} className="h-4 w-4 bg-amber-200" />
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
 
-                    {item.name === "Lunar Phase Tray" && (
-                      <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 border border-white rounded-full bg-white" />
-                        <div className="h-10 w-10 border border-white rounded-full bg-neutral-800" />
-                        <div className="h-10 w-10 border border-white rounded-full bg-white/40" />
-                      </div>
-                    )}
+                      {item.name === "Lunar Phase Tray" && (
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-full border border-white bg-white" />
+                          <div className="h-10 w-10 rounded-full border border-white bg-neutral-800" />
+                          <div className="h-10 w-10 rounded-full border border-white bg-white/40" />
+                        </div>
+                      )}
 
-                    {item.name === "Monstera Tray" && (
-                      <div className="relative h-32 w-32 rotate-12 bg-green-700 shadow-2xl" style={{ clipPath: "polygon(50% 0%, 80% 10%, 100% 40%, 85% 100%, 50% 85%, 15% 100%, 0% 40%, 20% 10%)" }}>
-                        <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-green-900" />
-                      </div>
-                    )}
+                      {item.name === "Monstera Tray" && (
+                        <div
+                          className="relative h-32 w-32 rotate-12 bg-green-700 shadow-2xl"
+                          style={{ clipPath: "polygon(50% 0%, 80% 10%, 100% 40%, 85% 100%, 50% 85%, 15% 100%, 0% 40%, 20% 10%)" }}
+                        >
+                          <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-green-900" />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mb-3 inline-flex rounded-sm bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white/60">
+                    {item.tag}
+                  </div>
+                  <h3 className="text-2xl font-black">{item.name}</h3>
+                  <p className="mt-2 min-h-14 text-white/55">{item.description}</p>
+                  <div className="mt-6 flex items-center justify-between">
+                    <p className="text-xl font-black">{item.price}</p>
+                    <button
+                      onClick={() => setCurrentPage("contact")}
+                      className="rounded-sm border border-white/15 px-4 py-2 text-sm font-bold transition group-hover:bg-white group-hover:text-neutral-950"
+                    >
+                      Ask About It
+                    </button>
                   </div>
                 </div>
-                <div className="mb-3 inline-flex rounded-sm bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white/60">
-                  {item.tag}
-                </div>
-                <h3 className="text-2xl font-black">{item.name}</h3>
-                <p className="mt-2 min-h-14 text-white/55">{item.description}</p>
-                <div className="mt-6 flex items-center justify-between">
-                  <p className="text-xl font-black">{item.price}</p>
-                  <button onClick={() => setCurrentPage("contact")} className="rounded-sm border border-white/15 px-4 py-2 text-sm font-bold transition group-hover:bg-white group-hover:text-neutral-950">
-                    Ask About It
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          <div className="mt-16 grid gap-5 md:grid-cols-4">
-            {categories.map((cat) => {
-              const Icon = cat.icon;
-              return (
-                <div key={cat.title} className="rounded-sm border border-white/10 bg-neutral-900/70 p-6">
-                  <Icon className="mb-5 text-white/75" />
-                  <h3 className="text-xl font-black">{cat.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-white/55">{cat.text}</p>
-                </div>
-              );
-            })}
+            <div className="mt-16 grid gap-5 md:grid-cols-4">
+              {categories.map((cat) => {
+                const Icon = cat.icon;
+
+                return (
+                  <div key={cat.title} className="overflow-hidden rounded-sm border border-white/10 bg-neutral-900/70">
+                    <div className="flex h-44 items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
+                      {cat.title === "3D Printed Trays" && (
+                        <div className="grid rotate-12 grid-cols-3 gap-2">
+                          {Array.from({ length: 9 }).map((_, i) => (
+                            <div key={i} className="h-10 w-10 border border-amber-300 bg-amber-600 shadow-lg" />
+                          ))}
+                        </div>
+                      )}
+
+                      {cat.title === "Storage Boxes" && (
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="h-16 w-16 border-4 border-neutral-300 bg-neutral-700" />
+                          <div className="h-16 w-16 border-4 border-neutral-300 bg-neutral-800" />
+                          <div className="h-16 w-16 border-4 border-neutral-300 bg-neutral-600" />
+                          <div className="h-16 w-16 border-4 border-neutral-300 bg-neutral-700" />
+                        </div>
+                      )}
+
+                      {cat.title === "LED Lights" && (
+                        <div className="relative flex h-24 w-24 items-center justify-center bg-cyan-400 shadow-[0_0_40px_rgba(34,211,238,0.8)]">
+                          <div className="h-12 w-12 bg-white/90" />
+                        </div>
+                      )}
+
+                      {cat.title === "Earrings" && (
+                        <div className="flex gap-6">
+                          <div className="flex flex-col items-center">
+                            <div className="h-5 w-5 rounded-full border-2 border-pink-300" />
+                            <div className="h-16 w-3 bg-pink-400" />
+                          </div>
+                          <div className="flex flex-col items-center">
+                            <div className="h-5 w-5 rounded-full border-2 border-purple-300" />
+                            <div className="h-16 w-3 bg-purple-400" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="p-6">
+                      <Icon className="mb-5 text-white/75" />
+                      <h3 className="text-xl font-black">{cat.title}</h3>
+                      <p className="mt-3 text-sm leading-6 text-white/55">{cat.text}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       )}
 
       {currentPage === "services" && (
-      <section id="services" className="bg-white px-5 py-24 text-neutral-950">
+      <section id="services" className="bg-neutral-950 px-5 py-24 text-white">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-neutral-400">Services</p>
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-white/45">Services</p>
             <h2 className="text-3xl font-black tracking-tight md:text-5xl">Whatever it is, make it stand out.</h2>
-            <p className="mt-4 text-lg leading-8 text-neutral-600">
+            <p className="mt-4 text-lg leading-8 text-white/60">
               Custom stickers, vinyl decals, logo design, 3D prints, and vinyl-pressed shirts for individuals, makers, and small businesses.
             </p>
           </div>
@@ -315,12 +370,63 @@ function App() {
             {services.map((service) => {
               const Icon = service.icon;
               return (
-                <div key={service.title} className="rounded-md border border-neutral-200 bg-neutral-50 p-7 transition hover:-translate-y-1 hover:shadow-xl">
-                  <div className="mb-6 grid h-14 w-14 place-items-center rounded-sm bg-neutral-950 text-white">
-                    <Icon />
+                <div key={service.title} className="overflow-hidden rounded-md border border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:bg-white/[0.07]">
+                  <div className="flex h-48 items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
+                    {service.title === "Custom 3D Prints" && (
+                      <div className="grid grid-cols-3 gap-2 rotate-12">
+                        {Array.from({ length: 9 }).map((_, i) => (
+                          <div key={i} className="h-10 w-10 border border-cyan-300 bg-cyan-500 shadow-lg" />
+                        ))}
+                      </div>
+                    )}
+
+                    {service.title === "Vinyl Decals" && (
+                      <div className="flex rotate-[-8deg] gap-3">
+                        <div className="h-20 w-20 border-4 border-neutral-400 bg-neutral-700" />
+                        <div className="mt-8 h-20 w-20 border-4 border-neutral-500 bg-neutral-600" />
+                      </div>
+                    )}
+
+                    {service.title === "Custom Stickers" && (
+                      <div className="flex max-w-[180px] flex-wrap justify-center gap-3">
+                        <div className="h-16 w-16 rotate-12 border-4 border-neutral-300 bg-neutral-700" />
+                        <div className="h-16 w-16 -rotate-6 border-4 border-neutral-400 bg-neutral-600" />
+                        <div className="h-16 w-16 rotate-3 border-4 border-neutral-500 bg-neutral-800" />
+                      </div>
+                    )}
+
+                    {service.title === "Logo Design" && (
+                      <div className="relative flex h-28 w-28 items-center justify-center border-4 border-white bg-neutral-900">
+                        <div className="absolute h-20 w-20 rotate-45 border-4 border-orange-400" />
+                        <div className="text-3xl font-black text-orange-300">M</div>
+                      </div>
+                    )}
+
+                    {service.title === "Vinyl-Pressed Shirts" && (
+                      <div className="relative h-32 w-28 bg-purple-500 shadow-2xl" style={{ clipPath: "polygon(20% 0%, 35% 0%, 45% 10%, 55% 10%, 65% 0%, 80% 0%, 100% 20%, 85% 35%, 85% 100%, 15% 100%, 15% 35%, 0% 20%)" }}>
+                        <div className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 border-4 border-white" />
+                      </div>
+                    )}
+
+                    {service.title === "Laser Engraving & Cutting" && (
+                      <div className="relative flex h-32 w-32 items-center justify-center border-4 border-amber-500 bg-neutral-800 shadow-2xl">
+                        <div className="absolute top-0 h-2 w-full bg-red-500 shadow-[0_0_18px_rgba(239,68,68,0.9)]" />
+                        <div className="grid grid-cols-3 gap-2">
+                          {Array.from({ length: 9 }).map((_, i) => (
+                            <div key={i} className="h-6 w-6 border border-amber-300 bg-neutral-700" />
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
+
+                  <div className="p-7">
+                    <div className="mb-6 grid h-14 w-14 place-items-center rounded-sm border border-white/10 bg-neutral-900 text-white">
+                      <Icon />
+                    </div>
                   <h3 className="text-2xl font-black">{service.title}</h3>
-                  <p className="mt-4 leading-7 text-neutral-600">{service.text}</p>
+                  <p className="mt-4 leading-7 text-white/60">{service.text}</p>
+                  </div>
                 </div>
               );
             })}
