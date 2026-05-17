@@ -89,9 +89,13 @@ function Header({ currentPage, setCurrentPage }) {
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-neutral-950/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
         <button onClick={() => setCurrentPage("home")} className="group flex items-center gap-4">
-          <div className="grid h-14 w-14 place-items-center rounded-full border-2 border-white bg-white text-neutral-950 shadow-lg shadow-white/10 transition group-hover:rotate-3">
-            <Sparkles size={24} />
-          </div>
+          <div className="overflow-hidden rounded-full border-2 border-white bg-white shadow-lg shadow-white/10 transition group-hover:scale-105">
+  <img
+    src="/logo.gif"
+    alt="Makeshift Creations Co. logo"
+    className="h-14 w-14 object-contain p-1"
+  />
+</div>
           <div>
             <p className="text-lg font-black tracking-tight text-white">Makeshift</p>
             <p className="-mt-1 text-xs uppercase tracking-[0.28em] text-white/55">Creations Co.</p>
