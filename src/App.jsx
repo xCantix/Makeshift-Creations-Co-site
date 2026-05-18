@@ -29,10 +29,12 @@ const navItems = [
 
 const bestSellers = [
   {
-    name: "HoneyComb Tray",
-    price: "$40.00",
-    description: "A bold modular tray made for clean setups and everyday organization.",
+    name: "Honeycomb Desk Organizer Storage Tray",
+    price: "$12.00",
+    description: "A geometric honeycomb-inspired organizer designed to keep desks, tools, and everyday essentials clean and accessible.",
     tag: "Best Seller",
+    image: "/honeycomb-tray.png",
+    link: "https://makeshift-creations-co-2.myshopify.com/products/honeycomb-desk-organizer-storage-tray?variant=54622070538612",
   },
   {
     name: "Lunar Phase Storage Box/Organizer",
@@ -238,14 +240,12 @@ function App() {
                 >
                   <div className="mb-6 overflow-hidden rounded-sm border border-white/10 bg-neutral-900">
                     <div className="flex h-52 items-center justify-center bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
-                      {item.name === "HoneyComb Tray" && (
-                        <div className="relative flex h-32 w-32 items-center justify-center border-[8px] border-amber-800 bg-amber-700 shadow-2xl">
-                          <div className="grid grid-cols-4 gap-1">
-                            {Array.from({ length: 16 }).map((_, i) => (
-                              <div key={i} className="h-4 w-4 bg-amber-200" />
-                            ))}
-                          </div>
-                        </div>
+                      {item.name === "Honeycomb Desk Organizer Storage Tray" && (
+                        <img
+                          src={item.image}
+                          alt="Honeycomb Desk Organizer Storage Tray"
+                          className="h-full w-full object-cover"
+                        />
                       )}
 
                       {item.name === "Lunar Phase Storage Box/Organizer" && (
