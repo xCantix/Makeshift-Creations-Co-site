@@ -23,6 +23,7 @@ const navItems = [
   { label: "Home", page: "home" },
   { label: "Creations", page: "creations" },
   { label: "Services", page: "services" },
+  { label: "Calculator", page: "calculator" },
   { label: "About", page: "about" },
   { label: "Contact", page: "contact" },
 ];
@@ -35,6 +36,7 @@ const bestSellers = [
     tag: "Best Seller",
     image: "/honeycomb-tray.png",
     link: "https://makeshift-creations-co-2.myshopify.com/products/honeycomb-desk-organizer-storage-tray?variant=54622070538612",
+    category: "3D Printed Trays",
   },
   {
     name: "Lunar Phase Storage Box/Organizer",
@@ -43,6 +45,7 @@ const bestSellers = [
     tag: "New Release",
     image: "/lunar-phase-organizer.png",
     link: "https://8q9kqxr4pdprn8vg-99837706612.shopifypreview.com/products/lunar-phase-storage-box-organizer",
+    category: "3D Printed Trays",
   },
   {
     name: "Monstera Leaf Desk Organizer & Multi-Purpose Holder",
@@ -51,6 +54,7 @@ const bestSellers = [
     tag: "Decor Pick",
     image: "/monstera-organizer.png",
     link: "https://makeshift-creations-co-2.myshopify.com/products/monstera-leaf-desk-organizer-amp-multi-purpose-holder?variant=54622126145908",
+    category: "3D Printed Trays",
   },
 ];
 
@@ -162,6 +166,14 @@ function SectionHeader({ eyebrow, title, text }) {
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const openCategory = (categoryTitle) => {
+    setSelectedCategory(categoryTitle);
+    setCurrentPage("category");
+  };
+
+  const categoryProducts = bestSellers.filter((item) => item.category === selectedCategory);
 
   return (
     <main className="min-h-screen bg-neutral-950 text-white" style={{ fontFamily: "'Gaegu', cursive" }}>
@@ -292,7 +304,11 @@ function App() {
                 const Icon = cat.icon;
 
                 return (
-                  <div key={cat.title} className="overflow-hidden rounded-sm border border-white/10 bg-neutral-900/70">
+                  <button
+                    key={cat.title}
+                    onClick={() => openCategory(cat.title)}
+                    className="overflow-hidden rounded-sm border border-white/10 bg-neutral-900/70 text-left transition hover:-translate-y-1 hover:bg-white/[0.07]"
+                  >
                     <div className="flex h-44 items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
                       {cat.title === "3D Printed Trays" && (
                         <div className="grid rotate-12 grid-cols-3 gap-2">
@@ -336,10 +352,77 @@ function App() {
                       <h3 className="text-xl font-black">{cat.title}</h3>
                       <p className="mt-3 text-sm leading-6 text-white/55">{cat.text}</p>
                     </div>
-                  </div>
+                  </button>
                 );
               })}
             </div>
+          </div>
+        </section>
+      )}
+
+      {currentPage === "category" && (
+        <section id="category" className="border-t border-white/10 px-5 py-24">
+          <div className="mx-auto max-w-7xl">
+            <button
+              onClick={() => setCurrentPage("creations")}
+              className="mb-8 rounded-sm border border-white/15 px-5 py-3 text-xl font-bold text-white transition hover:bg-white/10"
+            >
+              ← Back to Creations
+            </button>
+
+            <SectionHeader
+              eyebrow="Shop Category"
+              title={selectedCategory || "Products"}
+              text="Browse products in this category. More items can be added here as your Shopify catalog grows."
+            />
+
+            <div className="mb-14 flex justify-start">
+              <button
+                onClick={() => setCurrentPage("creations")}
+                className="rounded-sm border border-white/15 bg-white/5 px-6 py-3 text-xl font-black text-white transition hover:bg-white hover:text-neutral-950"
+              >
+                ← Back
+              </button>
+            </div>
+
+            {categoryProducts.length > 0 ? (
+              <div className="grid gap-5 md:grid-cols-3">
+                {categoryProducts.map((item) => (
+                  <div
+                    key={item.name}
+                    className="group rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:bg-white/[0.07]"
+                  >
+                    <div className="mb-6 overflow-hidden rounded-sm border border-white/10 bg-neutral-900">
+                      <div className="flex h-52 items-center justify-center bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
+                        <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+                      </div>
+                    </div>
+
+                    <div className="mb-3 inline-flex rounded-sm bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white/60">
+                      {item.tag}
+                    </div>
+                    <h3 className="text-2xl font-black">{item.name}</h3>
+                    <p className="mt-2 min-h-14 text-white/55">{item.description}</p>
+                    <div className="mt-6 flex items-center justify-between">
+                      <p className="text-xl font-black">{item.price}</p>
+                      <button
+                        onClick={() => item.link ? window.open(item.link, "_blank") : setCurrentPage("contact")}
+                        className="rounded-sm border border-white/15 px-4 py-2 text-sm font-bold transition group-hover:bg-white group-hover:text-neutral-950"
+                      >
+                        View Product
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-md border border-white/10 bg-white/[0.04] p-10 text-center">
+                <h3 className="text-3xl font-black">No products listed here yet.</h3>
+                <p className="mt-4 text-xl text-white/60">
+                  This category is ready. Add products to it by giving them this category name in the product list.
+                </p>
+              </div>
+            )}
           </div>
         </section>
       )}
@@ -422,6 +505,39 @@ function App() {
           </div>
         </div>
       </section>
+      )}
+
+      {currentPage === "calculator" && (
+        <section id="calculator" className="border-y border-white/10 px-5 py-24">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeader
+              eyebrow="Quote Tool"
+              title="Makeshift Creations Co. Price Calculator"
+              text="Use this calculator to estimate custom project pricing before reaching out for a final quote."
+            />
+
+            <div className="overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/40">
+              <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                  <h3 className="text-3xl font-black text-white">Custom Quote Calculator</h3>
+                  <p className="mt-1 text-xl text-white/60">Calculator app embed area</p>
+                </div>
+                <button
+                  onClick={() => setCurrentPage("contact")}
+                  className="rounded-sm border border-white/15 px-5 py-3 text-xl font-bold text-white transition hover:bg-white hover:text-neutral-950"
+                >
+                  Request Final Quote
+                </button>
+              </div>
+
+              <iframe
+                title="Makeshift Creations Co. Price Calculator"
+                src="https://calculator-app-green-alpha.vercel.app/"
+                className="h-[1100px] w-full rounded-sm border border-white/10 bg-neutral-900"
+              />
+            </div>
+          </div>
+        </section>
       )}
 
       {currentPage === "about" && (
