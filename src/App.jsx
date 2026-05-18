@@ -163,34 +163,33 @@ function App() {
       <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
       {currentPage === "home" && (
-      <section id="home" className="relative overflow-hidden px-5 pb-24 pt-36 md:pt-44">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.16),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.08),transparent_30%)]" />
-        <div className="absolute left-1/2 top-28 h-72 w-72 -translate-x-1/2 rounded-sm bg-white/5 blur-3xl" />
+        <section id="home" className="relative overflow-hidden px-5 pb-24 pt-36 md:pt-44">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.16),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.08),transparent_30%)]" />
+          <div className="absolute left-1/2 top-28 h-72 w-72 -translate-x-1/2 rounded-sm bg-white/5 blur-3xl" />
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <div className="mb-6 inline-flex items-center gap-3 rounded-sm border border-white/10 bg-white/5 px-6 py-3 text-xl font-medium text-white">
-              <Sparkles size={24} /> Handmade goods. Custom work. Built with personality.
-            </div>
-            <h1 className="text-5xl font-black leading-[0.95] tracking-tight md:text-7xl">
-              Create. Customize. <span className="text-white/55">Inspire.</span>
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/65 md:text-xl">
-              Functional 3D printed organizers, trays, accessories, decals, stickers, shirts, and custom design work — made with care by Makeshift Creations Co.
-            </p>
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <button onClick={() => setCurrentPage("creations")} className="inline-flex items-center justify-center gap-2 rounded-sm bg-white px-6 py-3 font-bold text-neutral-950 transition hover:bg-white/90">
-                Shop Creations <ArrowRight size={18} />
-              </button>
-              <button onClick={() => setCurrentPage("services")} className="inline-flex items-center justify-center rounded-sm border border-white/15 px-6 py-3 font-bold text-white transition hover:bg-white/10">
-                Explore Services
-              </button>
-            </div>
-          </motion.div>
+          <div className="relative mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              <div className="mb-6 inline-flex items-center gap-3 rounded-sm border border-white/10 bg-white/5 px-6 py-3 text-xl font-medium text-white">
+                <Sparkles size={24} /> Handmade goods. Custom work. Built with personality.
+              </div>
+              <h1 className="text-5xl font-black leading-[0.95] tracking-tight md:text-7xl">
+                Create. Customize. <span className="text-white/55">Inspire.</span>
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/65 md:text-xl">
+                Functional 3D printed organizers, trays, accessories, decals, stickers, shirts, and custom design work — made with care by Makeshift Creations Co.
+              </p>
+              <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+                <button onClick={() => setCurrentPage("creations")} className="inline-flex items-center justify-center gap-2 rounded-sm bg-white px-6 py-3 font-bold text-neutral-950 transition hover:bg-white/90">
+                  Shop Creations <ArrowRight size={18} />
+                </button>
+                <button onClick={() => setCurrentPage("services")} className="inline-flex items-center justify-center rounded-sm border border-white/15 px-6 py-3 font-bold text-white transition hover:bg-white/10">
+                  Explore Services
+                </button>
+              </div>
+            </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }} className="relative">
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/40">
-              <div className="grid gap-4">
+            <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }} className="relative">
+              <div className="rounded-md border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/40">
                 <div className="overflow-hidden rounded-sm bg-white text-neutral-950">
                   <div className="flex h-64 items-center justify-center bg-gradient-to-br from-amber-200 via-orange-100 to-yellow-50">
                     <div className="relative flex h-40 w-40 items-center justify-center rounded-md border-[10px] border-amber-900 bg-amber-700 shadow-2xl">
@@ -208,30 +207,16 @@ function App() {
                     <p className="mt-3 text-neutral-600">A clean, bold organizer designed to make your setup look intentional.</p>
                     <div className="mt-8 flex items-center justify-between">
                       <p className="text-3xl font-black">$40.00</p>
-                      <button
-                        onClick={() => setCurrentPage("contact")}
-                        className="rounded-sm bg-neutral-950 px-5 py-2 text-sm font-bold text-white transition hover:bg-white/90"
-                      >
+                      <button onClick={() => setCurrentPage("contact")} className="rounded-sm bg-neutral-950 px-5 py-2 text-sm font-bold text-white transition hover:bg-neutral-800">
                         Order Now
                       </button>
                     </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-sm border border-white/10 bg-neutral-900 p-5">
-                    <p className="text-2xl font-black">3D</p>
-                    <p className="mt-2 text-sm text-white/55">Printed goods</p>
-                  </div>
-                  <div className="rounded-sm border border-white/10 bg-neutral-900 p-5">
-                    <p className="text-2xl font-black">Custom</p>
-                    <p className="mt-2 text-sm text-white/55">Quotes welcome</p>
-                  </div>
-                </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+            </motion.div>
+          </div>
+        </section>
       )}
 
       {currentPage === "creations" && (
@@ -262,7 +247,7 @@ function App() {
                       )}
 
                       {item.name === "Lunar Phase Tray" && (
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-4 text-3xl font-bold">
                           <div className="h-10 w-10 rounded-full border border-white bg-white" />
                           <div className="h-10 w-10 rounded-full border border-white bg-neutral-800" />
                           <div className="h-10 w-10 rounded-full border border-white bg-white/40" />
@@ -298,7 +283,7 @@ function App() {
               ))}
             </div>
 
-            <div className="mt-16 grid gap-5 md:grid-cols-4">
+            <div className="mt-28 grid gap-5 md:grid-cols-4">
               {categories.map((cat) => {
                 const Icon = cat.icon;
 
@@ -437,20 +422,34 @@ function App() {
 
       {currentPage === "about" && (
       <section id="about" className="border-y border-white/10 px-5 py-24">
-        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
-          <div className="rounded-md border border-white/10 bg-white/[0.04] p-8">
+        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-start">
+          <div className="mt-28 rounded-md border border-white/10 bg-white/[0.04] p-8">
             <p className="text-sm font-bold uppercase tracking-[0.3em] text-white/45">About</p>
             <h2 className="mt-4 text-4xl font-black tracking-tight">Started with one printer and a good idea.</h2>
           </div>
-          <div className="space-y-5 text-lg leading-8 text-white/65">
+          <div className="space-y-6 text-xl leading-9 text-white/70">
             <p>
-              Makeshift Creations Co. began with a single 3D printer and a simple need: better organizers and storage drawers for everyday use. Friends and family noticed, asked for their own, and the idea grew from there.
+              Makeshift Creations Co. started with a single 3D printer and a simple idea.
             </p>
+
             <p>
-              Today, we’re a hands-on husband-and-wife team combining creative inspiration, networking, 3D modeling, machine work, and careful finishing to make pieces that are personal, practical, and intentionally made.
+              After receiving a 3D printer as a Christmas gift, we began designing organizers and storage drawers for our own use. When friends and family saw them, the response was immediate. People loved the designs and started asking if we were selling them. With encouragement from those around us and a realization that there was a real need for well-made, thoughtful solutions, Makeshift Creations Co. was born.
             </p>
+
             <p>
-              We work with small businesses, fellow makers, and anyone with an idea they want to turn into something real.
+              We’re a small, husband-and-wife team focused on problem solving and creativity. She handles networking and creative inspiration, helping shape ideas and connect with people. He focuses on 3D modeling, learning the machines, and crafting each product with care. Together, we combine imagination and technical skill to bring ideas to life.
+            </p>
+
+            <p>
+              What matters most to us is taking the time to get the details right. Whether it’s a custom 3D print, vinyl decal, sticker, apparel piece, or logo design, we approach every project with the same mindset: listen first, think it through, and create something that truly works for the person who asked for it. We don’t mass-produce. We make things intentionally.
+            </p>
+
+            <p>
+              We primarily work with small businesses, fellow makers, and individuals who have an idea but aren’t sure how to turn it into something real. If you come to us unsure whether your idea is possible, our goal is for you to leave excited and confident handing it off, knowing it’s in good hands.
+            </p>
+
+            <p>
+              Makeshift Creations Co. is growing steadily and carefully, expanding our tools and capabilities as we go. We’re proud to stay hands-on, flexible, and personal, and we’ll always do everything we can to help make your ideas a reality.
             </p>
           </div>
         </div>
@@ -462,16 +461,16 @@ function App() {
         <div className="mx-auto max-w-7xl rounded-md bg-white p-8 text-neutral-950 md:p-12">
           <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr]">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.3em] text-neutral-400">Contact</p>
-              <h2 className="mt-4 text-4xl font-black tracking-tight md:text-5xl">Ready to make something?</h2>
-              <p className="mt-5 text-lg leading-8 text-neutral-600">
+              <p className="text-3xl font-black uppercase tracking-[0.3em] text-neutral-400">Contact</p>
+              <h2 className="mt-4 text-6xl font-black tracking-tight md:text-7xl">Ready to make something?</h2>
+              <p className="mt-5 text-3xl font-bold leading-[1.6] text-neutral-600">
                 Send the details, reference photos, size needs, colors, and deadline. We’ll help shape the idea into a quote.
               </p>
-              <div className="mt-8 space-y-4 text-neutral-700">
-                <a href="mailto:makeshiftcreationsco@gmail.com" className="flex items-center gap-3 transition hover:text-neutral-950">
+              <div className="mt-8 space-y-6 text-3xl font-bold text-neutral-700">
+                <a href="mailto:makeshiftcreationsco@gmail.com" className="flex items-center gap-4 text-3xl font-bold transition hover:text-neutral-950">
                   <Mail size={20} /> makeshiftcreationsco@gmail.com
                 </a>
-                <a href="tel:7253085837" className="flex items-center gap-3 transition hover:text-neutral-950">
+                <a href="tel:7253085837" className="flex items-center gap-4 text-3xl font-bold transition hover:text-neutral-950">
                   <Phone size={20} /> (725) 308-5837
                 </a>
                 <div className="flex items-center gap-3">
@@ -482,15 +481,15 @@ function App() {
 
             <form className="grid gap-4" onSubmit={(e) => e.preventDefault()}>
               <div className="grid gap-4 md:grid-cols-2">
-                <input className="rounded-sm border border-neutral-200 bg-neutral-50 px-5 py-4 outline-none focus:border-neutral-950" placeholder="Name" />
-                <input className="rounded-sm border border-neutral-200 bg-neutral-50 px-5 py-4 outline-none focus:border-neutral-950" placeholder="Email" />
+                <input className="rounded-sm border border-neutral-200 bg-neutral-50 px-6 py-5 text-2xl font-bold outline-none focus:border-neutral-950" placeholder="Name" />
+                <input className="rounded-sm border border-neutral-200 bg-neutral-50 px-6 py-5 text-2xl font-bold outline-none focus:border-neutral-950" placeholder="Email" />
               </div>
-              <input className="rounded-sm border border-neutral-200 bg-neutral-50 px-5 py-4 outline-none focus:border-neutral-950" placeholder="Project type" />
-              <textarea className="min-h-40 rounded-sm border border-neutral-200 bg-neutral-50 px-5 py-4 outline-none focus:border-neutral-950" placeholder="Tell us what you want made..." />
-              <button className="inline-flex items-center justify-center gap-2 rounded-sm bg-neutral-950 px-6 py-4 font-bold text-white transition hover:bg-neutral-800">
+              <input className="rounded-sm border border-neutral-200 bg-neutral-50 px-6 py-5 text-2xl font-bold outline-none focus:border-neutral-950" placeholder="Project type" />
+              <textarea className="min-h-40 rounded-sm border border-neutral-200 bg-neutral-50 px-6 py-5 text-2xl font-bold outline-none focus:border-neutral-950" placeholder="Tell us what you want made..." />
+              <button className="inline-flex items-center justify-center gap-3 rounded-sm bg-neutral-950 px-8 py-5 text-3xl font-black text-white transition hover:bg-neutral-800">
                 Request a Quote <ArrowRight size={18} />
               </button>
-              <p className="text-sm text-neutral-500">
+              <p className="text-xl font-bold text-neutral-500">
                 Form is visual only until connected to Formspree, EmailJS, Netlify Forms, or your backend.
               </p>
             </form>
