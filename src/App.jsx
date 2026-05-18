@@ -599,20 +599,30 @@ function App() {
               </div>
             </div>
 
-            <form className="grid gap-4" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid gap-4 md:grid-cols-2">
-                <input className="rounded-sm border border-neutral-200 bg-neutral-50 px-6 py-5 text-2xl font-bold outline-none focus:border-neutral-950" placeholder="Name" />
-                <input className="rounded-sm border border-neutral-200 bg-neutral-50 px-6 py-5 text-2xl font-bold outline-none focus:border-neutral-950" placeholder="Email" />
+            <div className="flex flex-col items-start gap-6">
+              <div className="rounded-sm border border-neutral-200 bg-neutral-50 p-8">
+                <h3 className="text-4xl font-black text-neutral-950">
+                  Start Your Project
+                </h3>
+
+                <p className="mt-4 text-2xl font-bold leading-10 text-neutral-600">
+                  Fill out our detailed project inquiry form and we’ll get back to you
+                  with pricing, recommendations, and next steps.
+                </p>
+
+                <button
+                  onClick={() =>
+                    window.open(
+                      "https://formspace.club/f/7e253da8-1676-45cc-be5a-cd773efbbc45",
+                      "_blank"
+                    )
+                  }
+                  className="mt-8 inline-flex items-center justify-center gap-3 rounded-sm bg-neutral-950 px-8 py-5 text-3xl font-black text-white transition hover:bg-neutral-800"
+                >
+                  Open Inquiry Form <ArrowRight size={18} />
+                </button>
               </div>
-              <input className="rounded-sm border border-neutral-200 bg-neutral-50 px-6 py-5 text-2xl font-bold outline-none focus:border-neutral-950" placeholder="Project type" />
-              <textarea className="min-h-40 rounded-sm border border-neutral-200 bg-neutral-50 px-6 py-5 text-2xl font-bold outline-none focus:border-neutral-950" placeholder="Tell us what you want made..." />
-              <button className="inline-flex items-center justify-center gap-3 rounded-sm bg-neutral-950 px-8 py-5 text-3xl font-black text-white transition hover:bg-neutral-800">
-                Request a Quote <ArrowRight size={18} />
-              </button>
-              <p className="text-xl font-bold text-neutral-500">
-                Form is visual only until connected to Formspree, EmailJS, Netlify Forms, or your backend.
-              </p>
-            </form>
+            </div>
           </div>
         </div>
       </section>
