@@ -35,10 +35,12 @@ const bestSellers = [
     tag: "Best Seller",
   },
   {
-    name: "Lunar Phase Tray",
-    price: "$35.00",
-    description: "A witchy-inspired organizer with a clean display-ready profile.",
-    tag: "Fan Favorite",
+    name: "Lunar Phase Storage Box/Organizer",
+    price: "$12.00",
+    description: "A celestial-inspired desk organizer designed for pens, tools, notes, and everyday essentials.",
+    tag: "New Release",
+    image: "/lunar-phase-organizer.png",
+    link: "https://8q9kqxr4pdprn8vg-99837706612.shopifypreview.com/products/lunar-phase-storage-box-organizer",
   },
   {
     name: "Monstera Tray",
@@ -246,12 +248,12 @@ function App() {
                         </div>
                       )}
 
-                      {item.name === "Lunar Phase Tray" && (
-                        <div className="flex items-center gap-4 text-3xl font-bold">
-                          <div className="h-10 w-10 rounded-full border border-white bg-white" />
-                          <div className="h-10 w-10 rounded-full border border-white bg-neutral-800" />
-                          <div className="h-10 w-10 rounded-full border border-white bg-white/40" />
-                        </div>
+                      {item.name === "Lunar Phase Storage Box/Organizer" && (
+                        <img
+                          src={item.image}
+                          alt="Lunar Phase Storage Box Organizer"
+                          className="h-full w-full object-cover"
+                        />
                       )}
 
                       {item.name === "Monstera Tray" && (
@@ -273,10 +275,10 @@ function App() {
                   <div className="mt-6 flex items-center justify-between">
                     <p className="text-xl font-black">{item.price}</p>
                     <button
-                      onClick={() => setCurrentPage("contact")}
+                      onClick={() => item.link ? window.open(item.link, "_blank") : setCurrentPage("contact")}
                       className="rounded-sm border border-white/15 px-4 py-2 text-sm font-bold transition group-hover:bg-white group-hover:text-neutral-950"
                     >
-                      Ask About It
+                      View Product
                     </button>
                   </div>
                 </div>
