@@ -45,10 +45,12 @@ const bestSellers = [
     link: "https://8q9kqxr4pdprn8vg-99837706612.shopifypreview.com/products/lunar-phase-storage-box-organizer",
   },
   {
-    name: "Monstera Tray",
+    name: "Monstera Leaf Desk Organizer & Multi-Purpose Holder",
     price: "$25.99",
-    description: "A leafy statement piece for keys, accessories, and small essentials.",
+    description: "A botanical-inspired organizer perfect for desks, accessories, pens, tools, and everyday essentials.",
     tag: "Decor Pick",
+    image: "/monstera-organizer.png",
+    link: "https://makeshift-creations-co-2.myshopify.com/products/monstera-leaf-desk-organizer-amp-multi-purpose-holder?variant=54622126145908",
   },
 ];
 
@@ -257,13 +259,12 @@ function App() {
                         />
                       )}
 
-                      {item.name === "Monstera Tray" && (
-                        <div
-                          className="relative h-32 w-32 rotate-12 bg-green-700 shadow-2xl"
-                          style={{ clipPath: "polygon(50% 0%, 80% 10%, 100% 40%, 85% 100%, 50% 85%, 15% 100%, 0% 40%, 20% 10%)" }}
-                        >
-                          <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-green-900" />
-                        </div>
+                      {item.name === "Monstera Leaf Desk Organizer & Multi-Purpose Holder" && (
+                        <img
+                          src={item.image}
+                          alt="Monstera Leaf Desk Organizer & Multi-Purpose Holder"
+                          className="h-full w-full object-cover"
+                        />
                       )}
                     </div>
                   </div>
