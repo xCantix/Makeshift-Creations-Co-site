@@ -223,19 +223,19 @@ function App() {
                     <p className="mt-3 text-neutral-600">A clean, bold organizer designed to make your setup look intentional.</p>
                     <div className="mt-8 flex items-center justify-between">
                       <p className="text-3xl font-black">$40.00</p>
-                      <a
-                  href="https://formspace.club/f/7e253da8-1676-45cc-be5a-cd773efbbc45"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-8 inline-flex items-center justify-center gap-3 rounded-sm bg-neutral-950 px-8 py-5 text-3xl font-black text-white transition hover:bg-neutral-800"
-                >
-                  Open Inquiry Form <ArrowRight size={18} />
-                </a>
+                      <button
+                        onClick={() => window.open("https://makeshift-creations-co-2.myshopify.com/products/honeycomb-desk-organizer-storage-tray?variant=54622070538612", "_blank")}
+                        className="rounded-sm bg-neutral-950 px-5 py-2 text-sm font-bold text-white transition hover:bg-neutral-800"
+                      >
+                        View Product
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
       )}
 
       <footer className="border-t border-white/10 px-5 py-10">
