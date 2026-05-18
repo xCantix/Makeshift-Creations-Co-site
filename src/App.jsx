@@ -30,7 +30,7 @@ const navItems = [
 const bestSellers = [
   {
     name: "Honeycomb Desk Organizer Storage Tray",
-    price: "$12.00",
+    price: "$40.00",
     description: "A geometric honeycomb-inspired organizer designed to keep desks, tools, and everyday essentials clean and accessible.",
     tag: "Best Seller",
     image: "/honeycomb-tray.png",
@@ -196,23 +196,24 @@ function App() {
               <div className="rounded-md border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/40">
                 <div className="overflow-hidden rounded-sm bg-white text-neutral-950">
                   <div className="flex h-64 items-center justify-center bg-gradient-to-br from-amber-200 via-orange-100 to-yellow-50">
-                    <div className="relative flex h-40 w-40 items-center justify-center rounded-md border-[10px] border-amber-900 bg-amber-700 shadow-2xl">
-                      <div className="grid grid-cols-4 gap-2">
-                        {Array.from({ length: 16 }).map((_, i) => (
-                          <div key={i} className="h-5 w-5 rounded-sm bg-amber-200/90" />
-                        ))}
-                      </div>
-                    </div>
+                    <img
+                      src="/honeycomb-tray.png"
+                      alt="Honeycomb Desk Organizer Storage Tray"
+                      className="h-full w-full object-cover"
+                    />
                   </div>
 
                   <div className="p-8">
                     <p className="text-sm font-bold uppercase tracking-[0.25em] text-neutral-500">Featured</p>
-                    <h3 className="mt-4 text-4xl font-black">HoneyComb Tray</h3>
+                    <h3 className="mt-4 text-4xl font-black">Honeycomb Desk Organizer Storage Tray</h3>
                     <p className="mt-3 text-neutral-600">A clean, bold organizer designed to make your setup look intentional.</p>
                     <div className="mt-8 flex items-center justify-between">
                       <p className="text-3xl font-black">$40.00</p>
-                      <button onClick={() => setCurrentPage("contact")} className="rounded-sm bg-neutral-950 px-5 py-2 text-sm font-bold text-white transition hover:bg-neutral-800">
-                        Order Now
+                      <button
+                        onClick={() => window.open("https://makeshift-creations-co-2.myshopify.com/products/honeycomb-desk-organizer-storage-tray?variant=54622070538612", "_blank")}
+                        className="rounded-sm bg-neutral-950 px-5 py-2 text-sm font-bold text-white transition hover:bg-neutral-800"
+                      >
+                        View Product
                       </button>
                     </div>
                   </div>
