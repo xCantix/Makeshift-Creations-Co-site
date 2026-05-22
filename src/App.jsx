@@ -222,7 +222,7 @@ function App() {
                     <img
                       src="/honeycomb-tray.png"
                       alt="Honeycomb Desk Organizer Storage Tray"
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-contain p-2"
                     />
                   </div>
 
@@ -270,7 +270,7 @@ function App() {
                         <img
                           src="/monstera-3drawer.png"
                           alt="Monstera 3 Drawer Storage Box"
-                          className="h-full w-full object-cover"
+                          className="h-full w-full object-contain p-2"
                         />
                       )}
                       {cat.title === "LED Lights" && (
@@ -300,7 +300,7 @@ function App() {
                 <div key={item.name} className="group rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:bg-white/[0.07]">
                   <div className="mb-6 overflow-hidden rounded-sm border border-white/10 bg-neutral-900">
                     <div className="flex h-52 items-center justify-center bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
-                      <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+                      <img src={item.image} alt={item.name} className="h-full w-full object-contain p-2" />
                     </div>
                   </div>
                   <div className="mb-3 inline-flex rounded-sm bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white/60">{item.tag}</div>
@@ -332,7 +332,7 @@ function App() {
               <div className="grid gap-5 md:grid-cols-3">
                 {categoryProducts.map((item) => (
                   <div key={item.name} className="group rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:bg-white/[0.07]">
-                    <div className="mb-6 overflow-hidden rounded-sm border border-white/10 bg-neutral-900"><div className="flex h-52 items-center justify-center bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900"><img src={item.image} alt={item.name} className="h-full w-full object-cover" /></div></div>
+                    <div className="mb-6 overflow-hidden rounded-sm border border-white/10 bg-neutral-900"><div className="flex h-52 items-center justify-center bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900"><img src={item.image} alt={item.name} className="h-full w-full object-contain p-2" /></div></div>
                     <div className="mb-3 inline-flex rounded-sm bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white/60">{item.tag}</div>
                     <h3 className="text-2xl font-black">{item.name}</h3>
                     <p className="mt-2 min-h-14 text-white/55">{item.description}</p>
