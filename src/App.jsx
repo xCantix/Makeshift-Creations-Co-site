@@ -255,7 +255,47 @@ function App() {
               text="Choose a category below to browse current products."
             />
 
-            <div className="grid gap-5 md:grid-cols-3">
+            <div className="grid gap-5 md:grid-cols-4">
+              {categories.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <button key={cat.title} onClick={() => openCategory(cat.title)} className="overflow-hidden rounded-sm border border-white/10 bg-neutral-900/70 text-left transition hover:-translate-y-1 hover:bg-white/[0.07] scale-90">
+                    <div className="flex h-36 items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
+                      {cat.title === "3D Printed Trays" && (
+                        <div className="grid rotate-12 grid-cols-3 gap-2">
+                          {Array.from({ length: 9 }).map((_, i) => <div key={i} className="h-10 w-10 border border-amber-300 bg-amber-600 shadow-lg" />)}
+                        </div>
+                      )}
+                      {cat.title === "Storage Boxes" && (
+                        <img
+                          src="/monstera-3drawer.png"
+                          alt="Monstera 3 Drawer Storage Box"
+                          className="h-full w-full object-cover"
+                        />
+                      )}
+                      {cat.title === "LED Lights" && (
+                        <div className="relative flex h-24 w-24 items-center justify-center bg-cyan-400 shadow-[0_0_40px_rgba(34,211,238,0.8)]">
+                          <div className="h-12 w-12 bg-white/90" />
+                        </div>
+                      )}
+                      {cat.title === "Earrings" && (
+                        <div className="flex gap-6">
+                          <div className="flex flex-col items-center"><div className="h-5 w-5 rounded-full border-2 border-pink-300" /><div className="h-16 w-3 bg-pink-400" /></div>
+                          <div className="flex flex-col items-center"><div className="h-5 w-5 rounded-full border-2 border-purple-300" /><div className="h-16 w-3 bg-purple-400" /></div>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <Icon className="mb-5 text-white/75" />
+                      <h3 className="text-lg font-black">{cat.title}</h3>
+                      <p className="mt-2 text-xs leading-5 text-white/55">{cat.text}</p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-16 grid gap-5 md:grid-cols-3">
               {bestSellers.map((item) => (
                 <div key={item.name} className="group rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:bg-white/[0.07]">
                   <div className="mb-6 overflow-hidden rounded-sm border border-white/10 bg-neutral-900">
@@ -274,47 +314,6 @@ function App() {
                   </div>
                 </div>
               ))}
-            </div>
-
-            <div className="mt-16 grid gap-5 md:grid-cols-4">
-              {categories.map((cat) => {
-                const Icon = cat.icon;
-                return (
-                  <button key={cat.title} onClick={() => openCategory(cat.title)} className="overflow-hidden rounded-sm border border-white/10 bg-neutral-900/70 text-left transition hover:-translate-y-1 hover:bg-white/[0.07]">
-                    <div className="flex h-44 items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
-                      {cat.title === "3D Printed Trays" && (
-                        <div className="grid rotate-12 grid-cols-3 gap-2">
-                          {Array.from({ length: 9 }).map((_, i) => <div key={i} className="h-10 w-10 border border-amber-300 bg-amber-600 shadow-lg" />)}
-                        </div>
-                      )}
-                      {cat.title === "Storage Boxes" && (
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="h-16 w-16 border-4 border-neutral-300 bg-neutral-700" />
-                          <div className="h-16 w-16 border-4 border-neutral-300 bg-neutral-800" />
-                          <div className="h-16 w-16 border-4 border-neutral-300 bg-neutral-600" />
-                          <div className="h-16 w-16 border-4 border-neutral-300 bg-neutral-700" />
-                        </div>
-                      )}
-                      {cat.title === "LED Lights" && (
-                        <div className="relative flex h-24 w-24 items-center justify-center bg-cyan-400 shadow-[0_0_40px_rgba(34,211,238,0.8)]">
-                          <div className="h-12 w-12 bg-white/90" />
-                        </div>
-                      )}
-                      {cat.title === "Earrings" && (
-                        <div className="flex gap-6">
-                          <div className="flex flex-col items-center"><div className="h-5 w-5 rounded-full border-2 border-pink-300" /><div className="h-16 w-3 bg-pink-400" /></div>
-                          <div className="flex flex-col items-center"><div className="h-5 w-5 rounded-full border-2 border-purple-300" /><div className="h-16 w-3 bg-purple-400" /></div>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-6">
-                      <Icon className="mb-5 text-white/75" />
-                      <h3 className="text-xl font-black">{cat.title}</h3>
-                      <p className="mt-3 text-sm leading-6 text-white/55">{cat.text}</p>
-                    </div>
-                  </button>
-                );
-              })}
             </div>
           </div>
         </section>
