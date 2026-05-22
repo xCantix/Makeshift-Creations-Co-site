@@ -262,9 +262,11 @@ function App() {
                   <button key={cat.title} onClick={() => openCategory(cat.title)} className="overflow-hidden rounded-sm border border-white/10 bg-neutral-900/70 text-left transition hover:-translate-y-1 hover:bg-white/[0.07] scale-90">
                     <div className="flex h-36 items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
                       {cat.title === "3D Printed Trays" && (
-                        <div className="grid rotate-12 grid-cols-3 gap-2">
-                          {Array.from({ length: 9 }).map((_, i) => <div key={i} className="h-10 w-10 border border-amber-300 bg-amber-600 shadow-lg" />)}
-                        </div>
+                        <img
+                          src="/honeycomb-tray.png"
+                          alt="Honeycomb Desk Organizer Storage Tray"
+                          className="h-full w-full object-contain p-2"
+                        />
                       )}
                       {cat.title === "Storage Boxes" && (
                         <img
