@@ -30,6 +30,15 @@ const navItems = [
 
 const bestSellers = [
   {
+    name: "Monstera 3 Drawer Storage Box",
+    price: "$25.00",
+    description: "A botanical-inspired 3 drawer storage box designed to organize desks, craft supplies, accessories, and everyday essentials.",
+    tag: "Storage Pick",
+    image: "/monstera-3drawer.png",
+    link: "https://makeshift-creations-co-2.myshopify.com/products/monstera-3-drawer-storage-box",
+    category: "Storage Boxes",
+  },
+  {
     name: "Honeycomb Desk Organizer Storage Tray",
     price: "$40.00",
     description: "A geometric honeycomb-inspired organizer designed to keep desks, tools, and everyday essentials clean and accessible.",
