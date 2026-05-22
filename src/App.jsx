@@ -54,7 +54,7 @@ const bestSellers = [
     tag: "New Release",
     image: "/lunar-phase-organizer.png",
     link: "https://8q9kqxr4pdprn8vg-99837706612.shopifypreview.com/products/lunar-phase-storage-box-organizer",
-    category: "3D Printed Trays",
+    category: "Storage Boxes",
   },
   {
     name: "Monstera Leaf Desk Organizer & Multi-Purpose Holder",
