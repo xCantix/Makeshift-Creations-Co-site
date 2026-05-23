@@ -224,7 +224,7 @@ function Header({ currentPage, setCurrentPage }) {
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-neutral-950/85 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-end justify-between px-5 pt-4 pb-2">
+      <div className="relative mx-auto flex max-w-7xl items-end justify-between px-5 pt-8 pb-2">
         <button onClick={() => setCurrentPage("home")} className="group flex items-center">
           <div className="text-left leading-none text-white transition group-hover:text-white/80">
             <p className="text-5xl font-black tracking-tight">Makeshift</p>
@@ -243,7 +243,10 @@ function Header({ currentPage, setCurrentPage }) {
               {item.label}
             </button>
           ))}
-          <button onClick={() => setCurrentPage("contact")} className="rounded-sm bg-white px-8 py-4 text-2xl font-bold text-neutral-950 transition hover:bg-white/90">
+          <button
+            onClick={() => setCurrentPage("contact")}
+            className="absolute right-5 top-2 rounded-sm bg-white px-6 py-3 text-lg font-bold text-neutral-950 transition hover:bg-white/90"
+          >
             Get a Quote
           </button>
         </nav>
