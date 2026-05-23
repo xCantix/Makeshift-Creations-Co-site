@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";om "react";
+import React, { useLayoutEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Menu,
@@ -230,10 +230,15 @@ function App() {
 
   const openService = (service) => {
     setSelectedService(service);
-    setCurrentPage("serviceDetail"dCategory);
+    setCurrentPage("serviceDetail");
+  };
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const categoryProducts = bestSellers.filter((item) => item.category === selectedCategory);
+
+  useLayoutEffect(() => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    window.scrollTo(0, 0);
   }, [currentPage]);
 
   return (
