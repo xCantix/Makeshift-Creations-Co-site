@@ -88,31 +88,67 @@ const services = [
     title: "Custom 3D Prints",
     icon: Box,
     text: "Bring a model, sketch, or idea and we’ll help turn it into a real object — from prototypes to one-of-a-kind gifts.",
+    details: [
+      "Custom 3D printing is ideal for functional parts, organizers, prototypes, gifts, display pieces, replacement parts, and small-batch creative projects.",
+      "You can bring us a finished 3D model, a reference image, a sketch, or just an idea. We’ll help figure out what is realistic, what materials make sense, and how to approach the design so the final print works for your needs.",
+      "Every project is reviewed for size, complexity, material use, print time, finishing needs, and durability before pricing."
+    ],
+    includes: ["Design support", "3D printed parts", "Prototype help", "Small-batch production", "Functional and decorative prints"],
   },
   {
     title: "Vinyl Decals",
     icon: Sticker,
     text: "Made-to-order decals for windows, vehicles, packaging, displays, small business branding, and décor.",
+    details: [
+      "Vinyl decals are a clean way to add branding, decoration, labels, or custom artwork to smooth surfaces.",
+      "They work well for windows, vehicles, tumblers, laptops, packaging, display signs, business branding, and personal projects.",
+      "We can help size the design, choose colors, and prepare the layout so the finished decal is clear and easy to apply."
+    ],
+    includes: ["Custom sizing", "Single-color or layered vinyl", "Business decals", "Window and vehicle decals", "Application-ready designs"],
   },
   {
     title: "Custom Stickers",
     icon: Star,
     text: "Die-cut stickers for logos, drawings, events, product packaging, and personal projects.",
+    details: [
+      "Custom stickers are great for small businesses, packaging, branding, events, artwork, giveaways, and personal designs.",
+      "We can create stickers from logos, illustrations, simple text, or prepared artwork and help format the design for a clean finished result.",
+      "Sticker pricing depends on size, quantity, finish, material, and how much design preparation is needed."
+    ],
+    includes: ["Logo stickers", "Packaging stickers", "Event stickers", "Custom shapes", "Small-batch orders"],
   },
   {
     title: "Logo Design",
     icon: PenTool,
     text: "Simple, usable logo concepts for groups, small businesses, makers, and new brands finding their look.",
+    details: [
+      "Logo design is for customers who need a clean, usable starting point for a brand, project, group, shop, or event.",
+      "We focus on practical logos that can be used across stickers, shirts, decals, packaging, websites, and social media instead of overly complicated designs that are hard to reproduce.",
+      "The process usually starts with your business name, style preferences, colors, reference ideas, and where the logo will be used."
+    ],
+    includes: ["Simple logo concepts", "Brand direction", "Usable design files", "Sticker and apparel friendly layouts", "Small business branding"],
   },
   {
     title: "Vinyl-Pressed Shirts",
     icon: Shirt,
     text: "Custom shirts for events, gifts, teams, and everyday wear using heat-transfer vinyl.",
+    details: [
+      "Vinyl-pressed shirts are a strong option for custom apparel, small events, teams, gifts, staff shirts, and one-off designs.",
+      "Designs are created with heat-transfer vinyl and pressed onto apparel using heat and pressure for a clean finished look.",
+      "Pricing depends on shirt type, vinyl colors, design size, design complexity, and quantity."
+    ],
+    includes: ["Custom shirts", "Event apparel", "Small batch orders", "Text and graphic designs", "Heat-transfer vinyl"],
   },
   {
     title: "Laser Engraving & Cutting",
     icon: ScanLine,
     text: "Precision laser engraving and cutting for wood, acrylic, leather, slate, custom signage, gifts, and small business branding.",
+    details: [
+      "Laser engraving and cutting is great for custom signs, business cards, gifts, tags, plaques, décor, templates, and branded products.",
+      "We can work with designs for engraving, cutting, or both depending on the material and the final use of the item.",
+      "Project pricing depends on material, size, engraving time, cutting complexity, design preparation, and finishing needs."
+    ],
+    includes: ["Wood engraving", "Acrylic cutting", "Custom signs", "Business branding", "Personalized gifts"],
   },
 ];
 
@@ -185,10 +221,16 @@ function SectionHeader({ eyebrow, title, text }) {
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedService, setSelectedService] = useState(null);
 
   const openCategory = (categoryTitle) => {
     setSelectedCategory(categoryTitle);
     setCurrentPage("category");
+  };
+
+  const openService = (service) => {
+    setSelectedService(service);
+    setCurrentPage("serviceDetail");
   };
 
   const categoryProducts = bestSellers.filter((item) => item.category === selectedCategory);
@@ -256,7 +298,7 @@ function App() {
         </section>
       )}
       {currentPage === "creations" && (
-        <section id="creations" className="border-t border-white/10 px-5 py-24">
+        <section id="creations" className="border-t border-white/10 px-5 pt-40 pb-24">
           <div className="mx-auto max-w-7xl">
             <SectionHeader
               eyebrow="Creations"
@@ -337,7 +379,10 @@ function App() {
           <div className="mx-auto max-w-7xl">
             <SectionHeader eyebrow="Shop Category" title={selectedCategory || "Products"} text="Browse products in this category." />
             <div className="mb-14 flex justify-start">
-              <button onClick={() => setCurrentPage("creations")} className="rounded-sm border border-white/15 bg-white/5 px-6 py-3 text-xl font-black text-white transition hover:bg-white hover:text-neutral-950">
+              <button
+                onClick={() => setCurrentPage("creations")}
+                className="rounded-sm border border-white/15 bg-white/5 px-6 py-3 text-xl font-black text-white transition hover:bg-white hover:text-neutral-950"
+              >
                 ← Back
               </button>
             </div>
@@ -361,15 +406,19 @@ function App() {
       )}
 
       {currentPage === "services" && (
-        <section id="services" className="bg-neutral-950 px-5 py-24 text-white">
+        <section id="services" className="bg-neutral-950 px-5 pt-40 pb-24 text-white">
           <div className="mx-auto max-w-7xl">
             <SectionHeader eyebrow="Services" title="Whatever it is, make it stand out." text="Custom stickers, vinyl decals, logo design, 3D prints, laser engraving, and vinyl-pressed shirts." />
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {services.map((service) => {
                 const Icon = service.icon;
                 return (
-                  <div key={service.title} className="overflow-hidden rounded-md border border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:bg-white/[0.07]">
-                    <div className="flex h-48 items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
+                  <button
+                    key={service.title}
+                    onClick={() => openService(service)}
+                    className="flex h-full w-full flex-col overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-0 text-left align-top transition hover:-translate-y-1 hover:bg-white/[0.07]"
+                  >
+                    <div className="m-0 flex h-48 w-full items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
                       <Icon size={72} className="text-white/70" />
                     </div>
                     <div className="p-7">
@@ -377,7 +426,7 @@ function App() {
                       <h3 className="text-2xl font-black">{service.title}</h3>
                       <p className="mt-4 leading-7 text-white/60">{service.text}</p>
                     </div>
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -385,8 +434,62 @@ function App() {
         </section>
       )}
 
+      {currentPage === "serviceDetail" && selectedService && (
+        <section id="service-detail" className="border-y border-white/10 px-5 pt-44 pb-24">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 flex justify-start">
+              <button
+                onClick={() => setCurrentPage("services")}
+                className="rounded-sm border border-white/15 bg-white/5 px-6 py-3 text-xl font-black text-white transition hover:bg-white hover:text-neutral-950"
+              >
+                ← Back
+              </button>
+            </div>
+
+            <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-start">
+              <div className="rounded-md border border-white/10 bg-white/[0.04] p-8">
+                <div className="mb-8 grid h-20 w-20 place-items-center rounded-sm border border-white/10 bg-neutral-900 text-white">
+                  {React.createElement(selectedService.icon, { size: 42 })}
+                </div>
+                <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-white/45">Service</p>
+                <h2 className="text-5xl font-black tracking-tight text-white">{selectedService.title}</h2>
+                <p className="mt-5 text-2xl leading-10 text-white/60">{selectedService.text}</p>
+                <button
+                  onClick={() => setCurrentPage("contact")}
+                  className="mt-8 inline-flex items-center justify-center gap-3 rounded-sm bg-white px-8 py-4 text-2xl font-black text-neutral-950 transition hover:bg-white/90"
+                >
+                  Request a Quote <ArrowRight size={18} />
+                </button>
+              </div>
+
+              <div className="space-y-8">
+                <div className="rounded-md border border-white/10 bg-white/[0.04] p-8">
+                  <h3 className="text-4xl font-black text-white">About This Service</h3>
+                  <div className="mt-6 space-y-5 text-xl leading-9 text-white/65">
+                    {selectedService.details.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-md border border-white/10 bg-white/[0.04] p-8">
+                  <h3 className="text-4xl font-black text-white">Common Uses</h3>
+                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                    {selectedService.includes.map((item) => (
+                      <div key={item} className="rounded-sm border border-white/10 bg-neutral-900 px-5 py-4 text-xl font-bold text-white/70">
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {currentPage === "calculator" && (
-        <section id="calculator" className="border-y border-white/10 px-5 py-24">
+        <section id="calculator" className="border-y border-white/10 px-5 pt-40 pb-24">
           <div className="mx-auto max-w-7xl">
             <SectionHeader eyebrow="Quote Tool" title="Makeshift Creations Co. Price Calculator" text="Use this calculator to estimate custom project pricing before reaching out for a final quote." />
             <div className="overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/40">
@@ -401,7 +504,7 @@ function App() {
       )}
 
       {currentPage === "about" && (
-        <section id="about" className="border-y border-white/10 px-5 py-24">
+        <section id="about" className="border-y border-white/10 px-5 pt-40 pb-24">
           <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-start">
             <div className="mt-28 rounded-md border border-white/10 bg-white/[0.04] p-8">
               <p className="text-sm font-bold uppercase tracking-[0.3em] text-white/45">About</p>
@@ -420,7 +523,7 @@ function App() {
       )}
 
       {currentPage === "contact" && (
-        <section id="contact" className="px-5 py-24">
+        <section id="contact" className="px-5 pt-40 pb-24">
           <div className="mx-auto max-w-7xl rounded-md bg-white p-8 text-neutral-950 md:p-12">
             <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr]">
               <div>
