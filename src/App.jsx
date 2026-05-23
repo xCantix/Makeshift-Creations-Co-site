@@ -30,6 +30,15 @@ const navItems = [
 
 const bestSellers = [
   {
+    name: "Monstera Leaf LED Wall Light",
+    price: "$15.00",
+    description: "A tropical-inspired LED wall light with a soft ambient glow and bold monstera leaf styling.",
+    tag: "LED Glow",
+    image: "/monstera-led.png",
+    link: "https://makeshift-creations-co-2.myshopify.com/products/monstera-leaf-led-wall-light",
+    category: "LED Lights",
+  },
+  {
     name: "Monstera 3 Drawer Storage Box",
     price: "$25.00",
     description: "A botanical-inspired 3 drawer storage box designed to organize desks, craft supplies, accessories, and everyday essentials.",
@@ -276,9 +285,11 @@ function App() {
                         />
                       )}
                       {cat.title === "LED Lights" && (
-                        <div className="relative flex h-24 w-24 items-center justify-center bg-cyan-400 shadow-[0_0_40px_rgba(34,211,238,0.8)]">
-                          <div className="h-12 w-12 bg-white/90" />
-                        </div>
+                        <img
+                          src="/monstera-led.png"
+                          alt="Monstera Leaf LED Wall Light"
+                          className="h-full w-full object-contain p-2"
+                        />
                       )}
                       {cat.title === "Earrings" && (
                         <div className="flex gap-6">
