@@ -224,16 +224,16 @@ function Header({ currentPage, setCurrentPage }) {
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-neutral-950/85 backdrop-blur-xl">
-      <div className="relative mx-auto flex max-w-7xl items-end justify-between px-5 pt-8 pb-2">
+      <div className="relative mx-auto flex max-w-7xl flex-col items-start px-5 pt-8 pb-2">
         <button onClick={() => setCurrentPage("home")} className="group flex items-center">
           <div className="text-left leading-none text-white transition group-hover:text-white/80">
-            <p className="text-5xl font-black tracking-tight">Makeshift</p>
-            <p className="text-5xl font-black tracking-tight">Creations</p>
-            <p className="text-4xl font-black tracking-tight text-white">Co.</p>
+            <p className="text-6xl font-black tracking-tight whitespace-nowrap">
+              Makeshift Creations Co.
+            </p>
           </div>
         </button>
 
-        <nav className="hidden items-end gap-12 self-end pb-2 md:flex">
+        <nav className="mt-10 hidden w-full items-center justify-start gap-12 pb-2 md:flex">
           {navItems.map((item) => (
             <button
               key={item.label}
