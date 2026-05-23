@@ -24,6 +24,9 @@ const navItems = [
   { label: "Creations", page: "creations" },
   { label: "Services", page: "services" },
   { label: "Calculator", page: "calculator" },
+  { label: "Process", page: "process" },
+  { label: "FAQ", page: "faq" },
+  { label: "Gallery", page: "gallery" },
   { label: "About", page: "about" },
   { label: "Contact", page: "contact" },
 ];
@@ -74,6 +77,70 @@ const bestSellers = [
     link: "https://makeshift-creations-co-2.myshopify.com/products/monstera-leaf-desk-organizer-amp-multi-purpose-holder?variant=54622126145908",
     category: "3D Printed Trays",
   },
+];
+
+const processSteps = [
+  {
+    step: "01",
+    title: "Share Your Idea",
+    text: "Send us your project details, reference photos, rough measurements, colors, deadline, and anything you already know you want included.",
+  },
+  {
+    step: "02",
+    title: "We Review the Project",
+    text: "We look over the design needs, material options, machine time, complexity, and whether the project is best suited for 3D printing, vinyl, laser work, apparel, or a mix.",
+  },
+  {
+    step: "03",
+    title: "Quote & Plan",
+    text: "You’ll get pricing, recommendations, and next steps before production begins. For custom work, we make sure the direction is clear first.",
+  },
+  {
+    step: "04",
+    title: "Make It",
+    text: "Once approved, we create the piece carefully in small batches or one at a time, checking details as we go.",
+  },
+  {
+    step: "05",
+    title: "Finish & Deliver",
+    text: "We handle final cleanup, assembly, packing, and delivery or shipping details so the finished item is ready to use or gift.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Do you take custom orders?",
+    answer: "Yes. Custom work is one of the main things we do. Send your idea, reference photos, dimensions, colors, and intended use so we can review it properly.",
+  },
+  {
+    question: "How long does a custom project take?",
+    answer: "Timing depends on complexity, material availability, machine time, and current workload. Simple projects may be quick, while larger custom pieces can take longer.",
+  },
+  {
+    question: "Can you help if I only have an idea and no design file?",
+    answer: "Yes. You do not need a finished file to start. We can help shape the idea, discuss what is realistic, and plan the best way to make it.",
+  },
+  {
+    question: "Do you ship orders?",
+    answer: "Yes, shipping can be arranged for many products. Some larger, fragile, or highly custom items may need special handling.",
+  },
+  {
+    question: "Are 3D printed items perfectly smooth?",
+    answer: "No. Because of the 3D printing process, minor layer lines and small variations may be visible. That is part of the handmade character of the piece.",
+  },
+  {
+    question: "Do you do bulk or small business orders?",
+    answer: "Yes. We can review small-batch requests for stickers, decals, apparel, laser work, 3D prints, and branded items.",
+  },
+];
+
+const galleryItems = [
+  { title: "Honeycomb Desk Organizer", image: "/honeycomb-tray.png", type: "3D Printed Organizer" },
+  { title: "Monstera Storage Box", image: "/monstera-3drawer.png", type: "Storage Box" },
+  { title: "Monstera LED Wall Light", image: "/monstera-led.png", type: "LED Light" },
+  { title: "Lunar Phase Organizer", image: "/lunar-phase-organizer.png", type: "Storage Organizer" },
+  { title: "Monstera Desk Holder", image: "/monstera-organizer.png", type: "Desk Organizer" },
+  { title: "Custom Project Placeholder", image: null, type: "More Projects Coming Soon" },
 ];
 
 const categories = [
@@ -301,6 +368,35 @@ function App() {
               </div>
             </motion.div>
           </div>
+
+          <div className="relative mx-auto mt-16 max-w-7xl border border-white/10 bg-white/[0.04] p-8 shadow-2xl shadow-black/30 md:p-10">
+            <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+              <div>
+                <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-white/45">Custom Orders Welcome</p>
+                <h2 className="text-4xl font-black tracking-tight text-white md:text-6xl">
+                  Have an idea but don’t know where to start?
+                </h2>
+                <p className="mt-5 text-2xl leading-10 text-white/65">
+                  We help turn rough ideas, sketches, reference photos, and small business needs into real custom pieces.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-4 md:items-end">
+                <button
+                  onClick={() => setCurrentPage("process")}
+                  className="w-full rounded-sm border border-white/15 px-6 py-4 text-2xl font-black text-white transition hover:bg-white hover:text-neutral-950 md:w-auto"
+                >
+                  See the Process
+                </button>
+                <button
+                  onClick={() => setCurrentPage("contact")}
+                  className="w-full rounded-sm bg-white px-6 py-4 text-2xl font-black text-neutral-950 transition hover:bg-white/90 md:w-auto"
+                >
+                  Request a Quote
+                </button>
+              </div>
+            </div>
+          </div>
         </section>
       )}
       {currentPage === "creations" && (
@@ -504,6 +600,104 @@ function App() {
                 <button onClick={() => setCurrentPage("contact")} className="rounded-sm border border-white/15 px-5 py-3 text-xl font-bold text-white transition hover:bg-white hover:text-neutral-950">Request Final Quote</button>
               </div>
               <iframe title="Makeshift Creations Co. Price Calculator" src="https://calculator-app-green-alpha.vercel.app/" className="h-[1100px] w-full rounded-sm border border-white/10 bg-neutral-900" />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {currentPage === "process" && (
+        <section id="process" className="border-y border-white/10 px-5 pt-40 pb-24">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeader
+              eyebrow="How It Works"
+              title="From idea to finished piece."
+              text="A simple process for custom work, small-batch products, and creative projects."
+            />
+
+            <div className="grid gap-5 md:grid-cols-5">
+              {processSteps.map((item) => (
+                <div key={item.step} className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+                  <p className="text-5xl font-black text-white/20">{item.step}</p>
+                  <h3 className="mt-5 text-2xl font-black text-white">{item.title}</h3>
+                  <p className="mt-4 leading-7 text-white/60">{item.text}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-14 rounded-md border border-white/10 bg-white/[0.04] p-8 text-center">
+              <h3 className="text-4xl font-black text-white">Ready to start?</h3>
+              <p className="mx-auto mt-4 max-w-3xl text-2xl leading-10 text-white/60">
+                Send the idea first. We’ll help figure out what’s realistic, what it may cost, and what information we need next.
+              </p>
+              <button
+                onClick={() => setCurrentPage("contact")}
+                className="mt-8 rounded-sm bg-white px-8 py-4 text-2xl font-black text-neutral-950 transition hover:bg-white/90"
+              >
+                Start a Custom Order
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {currentPage === "faq" && (
+        <section id="faq" className="border-y border-white/10 px-5 pt-40 pb-24">
+          <div className="mx-auto max-w-5xl">
+            <SectionHeader
+              eyebrow="FAQ"
+              title="Common questions."
+              text="A quick guide before you place an order or request a custom project."
+            />
+
+            <div className="space-y-5">
+              {faqs.map((item) => (
+                <div key={item.question} className="rounded-md border border-white/10 bg-white/[0.04] p-7">
+                  <h3 className="text-3xl font-black text-white">{item.question}</h3>
+                  <p className="mt-4 text-xl leading-8 text-white/60">{item.answer}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-12 text-center">
+              <button
+                onClick={() => setCurrentPage("contact")}
+                className="rounded-sm bg-white px-8 py-4 text-2xl font-black text-neutral-950 transition hover:bg-white/90"
+              >
+                Still Have a Question?
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {currentPage === "gallery" && (
+        <section id="gallery" className="border-y border-white/10 px-5 pt-40 pb-24">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeader
+              eyebrow="Gallery"
+              title="Recent work and product previews."
+              text="A growing look at finished pieces, product photos, and custom project examples."
+            />
+
+            <div className="grid gap-5 md:grid-cols-3">
+              {galleryItems.map((item) => (
+                <div key={item.title} className="overflow-hidden rounded-md border border-white/10 bg-white/[0.04]">
+                  <div className="flex h-72 items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
+                    {item.image ? (
+                      <img src={item.image} alt={item.title} className="h-full w-full object-contain p-3" />
+                    ) : (
+                      <div className="text-center">
+                        <Sparkles className="mx-auto mb-4 text-white/40" size={60} />
+                        <p className="text-2xl font-black text-white/50">More coming soon</p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    <p className="text-sm font-bold uppercase tracking-[0.25em] text-white/45">{item.type}</p>
+                    <h3 className="mt-3 text-2xl font-black text-white">{item.title}</h3>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
