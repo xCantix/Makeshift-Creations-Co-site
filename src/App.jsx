@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";om "react";
 import { motion } from "framer-motion";
 import {
   Menu,
@@ -230,10 +230,11 @@ function App() {
 
   const openService = (service) => {
     setSelectedService(service);
-    setCurrentPage("serviceDetail");
-  };
+    setCurrentPage("serviceDetail"dCategory);
 
-  const categoryProducts = bestSellers.filter((item) => item.category === selectedCategory);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   return (
     <main className="min-h-screen bg-neutral-950 text-white" style={{ fontFamily: "'Gaegu', cursive" }}>
