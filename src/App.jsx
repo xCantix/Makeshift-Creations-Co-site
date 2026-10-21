@@ -17,6 +17,9 @@ import {
   Package,
   Star,
   ScanLine,
+  Check,
+  Palette,
+  MessageCircle,
 } from "lucide-react";
 
 const navItems = [
@@ -335,6 +338,9 @@ function App() {
   };
 
   const categoryProducts = bestSellers.filter((item) => item.category === selectedCategory);
+  const relatedProducts = selectedProduct
+    ? bestSellers.filter((item) => item.name !== selectedProduct.name).slice(0, 3)
+    : [];
 
   useLayoutEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -541,42 +547,101 @@ function App() {
       )}
 
       {currentPage === "productDetail" && selectedProduct && (
-        <section id="product-detail" className="border-y border-white/10 px-5 pt-40 pb-24">
+        <section id="product-detail" className="relative overflow-hidden border-y border-white/10 px-5 pb-24 pt-32 md:pt-36">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_18%,rgba(252,211,77,0.10),transparent_30%)]" />
           <div className="mx-auto max-w-7xl">
-            <button
-              onClick={() => setCurrentPage(productReturnPage)}
-              className="mb-10 rounded-sm border border-white/15 bg-white/5 px-6 py-3 text-xl font-black text-white transition hover:bg-white hover:text-neutral-950"
-            >
-              ← Back
-            </button>
+            <div className="relative mb-8 flex items-center gap-3 text-sm font-bold text-white/45">
+              <button onClick={() => setCurrentPage("creations")} className="transition hover:text-amber-300">Creations</button>
+              <span>/</span>
+              <button onClick={() => { setSelectedCategory(selectedProduct.category); setCurrentPage("category"); }} className="transition hover:text-amber-300">{selectedProduct.category}</button>
+              <span>/</span>
+              <span className="truncate text-white/70">{selectedProduct.name}</span>
+            </div>
 
-            <div className="grid gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-start">
-              <div className="overflow-hidden rounded-md border border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900 p-5">
-                <img
-                  src={selectedProduct.image}
-                  alt={selectedProduct.name}
-                  className="mx-auto h-auto max-h-[680px] w-full object-contain"
-                />
+            <div className="relative grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
+              <div>
+                <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#f7f3e8] p-4 shadow-2xl shadow-black/30 sm:p-7">
+                  <div className="absolute left-7 top-7 z-10 rounded-full bg-neutral-950/80 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white backdrop-blur">Product photo</div>
+                  <img
+                    src={selectedProduct.image}
+                    alt={selectedProduct.name}
+                    className="mx-auto aspect-square max-h-[650px] w-full rounded-2xl object-contain"
+                  />
+                </div>
+                <button
+                  onClick={() => setCurrentPage(productReturnPage)}
+                  className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-white hover:text-neutral-950"
+                >
+                  ← Back to browsing
+                </button>
               </div>
 
-              <div className="rounded-md border border-white/10 bg-white/[0.04] p-8 md:p-10">
-                <div className="inline-flex rounded-sm bg-white/10 px-3 py-1 text-sm font-bold uppercase tracking-widest text-white/60">
+              <div className="rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 shadow-2xl shadow-black/20 backdrop-blur md:p-9">
+                <div className="inline-flex rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-amber-200">
                   {selectedProduct.tag}
                 </div>
-                <h1 className="mt-5 text-4xl font-black tracking-tight text-white md:text-6xl">
+                <h1 className="brand-type mt-5 text-4xl font-black leading-[1.02] tracking-tight text-white md:text-5xl xl:text-6xl">
                   {selectedProduct.name}
                 </h1>
-                <p className="mt-6 text-4xl font-black text-white">{selectedProduct.price}</p>
-                <p className="mt-7 text-2xl leading-10 text-white/65">{selectedProduct.description}</p>
+                <div className="mt-6 flex flex-wrap items-end justify-between gap-3 border-b border-white/10 pb-6">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">Price</p>
+                    <p className="mt-1 text-4xl font-black text-white">{selectedProduct.price}</p>
+                  </div>
+                  <p className="rounded-full bg-white/5 px-4 py-2 text-sm font-semibold text-white/60">Custom requests quoted separately</p>
+                </div>
+                <p className="mt-6 text-lg leading-8 text-white/65 md:text-xl">{selectedProduct.description}</p>
+
+                <div className="mt-7 grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                  <div className="rounded-2xl border border-white/10 bg-neutral-950/40 p-4">
+                    <Check className="text-amber-300" size={20} />
+                    <p className="mt-3 text-sm font-bold text-white">Made with care</p>
+                    <p className="mt-1 text-xs leading-5 text-white/45">Small-batch maker quality</p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-neutral-950/40 p-4">
+                    <Palette className="text-amber-300" size={20} />
+                    <p className="mt-3 text-sm font-bold text-white">Make it yours</p>
+                    <p className="mt-1 text-xs leading-5 text-white/45">Ask about custom options</p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-neutral-950/40 p-4">
+                    <MessageCircle className="text-amber-300" size={20} />
+                    <p className="mt-3 text-sm font-bold text-white">Real help</p>
+                    <p className="mt-1 text-xs leading-5 text-white/45">Questions are welcome</p>
+                  </div>
+                </div>
+
                 <a
                   href={selectedProduct.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-10 inline-flex items-center justify-center gap-3 rounded-sm bg-white px-8 py-4 text-2xl font-black text-neutral-950 transition hover:bg-white/90"
+                  className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-amber-300 px-8 py-4 text-lg font-black text-neutral-950 transition hover:-translate-y-0.5 hover:bg-amber-200"
                 >
-                  Start an Inquiry
+                  Ask About This Piece
                   <ArrowRight size={22} />
                 </a>
+                <p className="mt-4 text-center text-sm leading-6 text-white/45">Tell us what you like, what you’d change, and when you need it.</p>
+              </div>
+            </div>
+
+            <div className="relative mt-20 border-t border-white/10 pt-14">
+              <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.25em] text-amber-300/70">Keep exploring</p>
+                  <h2 className="brand-type mt-2 text-3xl font-black text-white md:text-4xl">More from the workbench</h2>
+                </div>
+                <button onClick={() => setCurrentPage("creations")} className="text-sm font-bold text-white/60 transition hover:text-white">View all creations →</button>
+              </div>
+              <div className="grid gap-5 md:grid-cols-3">
+                {relatedProducts.map((item) => (
+                  <button key={item.name} onClick={() => openProduct(item, "creations")} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] text-left transition hover:-translate-y-1 hover:border-amber-300/30 hover:bg-white/[0.07]">
+                    <div className="h-52 bg-[#f7f3e8] p-3"><img src={item.image} alt="" className="h-full w-full object-contain" /></div>
+                    <div className="p-5">
+                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/40">{item.category}</p>
+                      <h3 className="mt-2 text-xl font-black text-white">{item.name}</h3>
+                      <div className="mt-4 flex items-center justify-between"><span className="font-black text-amber-300">{item.price}</span><span className="text-sm font-bold text-white/55 group-hover:text-white">View piece →</span></div>
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
           </div>
