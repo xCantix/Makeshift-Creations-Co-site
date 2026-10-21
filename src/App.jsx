@@ -310,6 +310,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [productReturnPage, setProductReturnPage] = useState("creations");
 
   const openCategory = (categoryTitle) => {
     setSelectedCategory(categoryTitle);
@@ -319,6 +321,12 @@ function App() {
   const openService = (service) => {
     setSelectedService(service);
     setCurrentPage("serviceDetail");
+  };
+
+  const openProduct = (product, returnPage = currentPage) => {
+    setSelectedProduct(product);
+    setProductReturnPage(returnPage);
+    setCurrentPage("productDetail");
   };
 
   const categoryProducts = bestSellers.filter((item) => item.category === selectedCategory);
@@ -378,7 +386,7 @@ function App() {
                     <div className="mt-8 flex items-center justify-between">
                       <p className="text-3xl font-black">$40.00</p>
                       <button
-                        onClick={() => window.open("https://makeshift-creations-co-2.myshopify.com/products/honeycomb-desk-organizer-storage-tray?variant=54622070538612", "_blank")}
+                        onClick={() => openProduct(bestSellers.find((item) => item.name === "Honeycomb Desk Organizer Storage Tray"), "home")}
                         className="rounded-sm bg-neutral-950 px-5 py-2 text-sm font-bold text-white transition hover:bg-neutral-800"
                       >
                         View Product
@@ -486,7 +494,7 @@ function App() {
                   <p className="mt-2 min-h-14 text-white/55">{item.description}</p>
                   <div className="mt-6 flex items-center justify-between">
                     <p className="text-xl font-black">{item.price}</p>
-                    <button onClick={() => window.open(item.link, "_blank")} className="rounded-sm border border-white/15 px-4 py-2 text-sm font-bold transition group-hover:bg-white group-hover:text-neutral-950">
+                    <button onClick={() => openProduct(item, "creations")} className="rounded-sm border border-white/15 px-4 py-2 text-sm font-bold transition group-hover:bg-white group-hover:text-neutral-950">
                       View Product
                     </button>
                   </div>
@@ -517,13 +525,56 @@ function App() {
                     <div className="mb-3 inline-flex rounded-sm bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white/60">{item.tag}</div>
                     <h3 className="text-2xl font-black">{item.name}</h3>
                     <p className="mt-2 min-h-14 text-white/55">{item.description}</p>
-                    <div className="mt-6 flex items-center justify-between"><p className="text-xl font-black">{item.price}</p><button onClick={() => window.open(item.link, "_blank")} className="rounded-sm border border-white/15 px-4 py-2 text-sm font-bold transition group-hover:bg-white group-hover:text-neutral-950">View Product</button></div>
+                    <div className="mt-6 flex items-center justify-between"><p className="text-xl font-black">{item.price}</p><button onClick={() => openProduct(item, "category")} className="rounded-sm border border-white/15 px-4 py-2 text-sm font-bold transition group-hover:bg-white group-hover:text-neutral-950">View Product</button></div>
                   </div>
                 ))}
               </div>
             ) : (
               <div className="rounded-md border border-white/10 bg-white/[0.04] p-10 text-center"><h3 className="text-3xl font-black">No products listed here yet.</h3><p className="mt-4 text-xl text-white/60">This category is ready for future products.</p></div>
             )}
+          </div>
+        </section>
+      )}
+
+      {currentPage === "productDetail" && selectedProduct && (
+        <section id="product-detail" className="border-y border-white/10 px-5 pt-40 pb-24">
+          <div className="mx-auto max-w-7xl">
+            <button
+              onClick={() => setCurrentPage(productReturnPage)}
+              className="mb-10 rounded-sm border border-white/15 bg-white/5 px-6 py-3 text-xl font-black text-white transition hover:bg-white hover:text-neutral-950"
+            >
+              ← Back
+            </button>
+
+            <div className="grid gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-start">
+              <div className="overflow-hidden rounded-md border border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900 p-5">
+                <img
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  className="mx-auto h-auto max-h-[680px] w-full object-contain"
+                />
+              </div>
+
+              <div className="rounded-md border border-white/10 bg-white/[0.04] p-8 md:p-10">
+                <div className="inline-flex rounded-sm bg-white/10 px-3 py-1 text-sm font-bold uppercase tracking-widest text-white/60">
+                  {selectedProduct.tag}
+                </div>
+                <h1 className="mt-5 text-4xl font-black tracking-tight text-white md:text-6xl">
+                  {selectedProduct.name}
+                </h1>
+                <p className="mt-6 text-4xl font-black text-white">{selectedProduct.price}</p>
+                <p className="mt-7 text-2xl leading-10 text-white/65">{selectedProduct.description}</p>
+                <a
+                  href={selectedProduct.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-10 inline-flex items-center justify-center gap-3 rounded-sm bg-white px-8 py-4 text-2xl font-black text-neutral-950 transition hover:bg-white/90"
+                >
+                  {selectedProduct.link.includes("formspace.club") ? "Start an Inquiry" : "Continue to Product"}
+                  <ArrowRight size={22} />
+                </a>
+              </div>
+            </div>
           </div>
         </section>
       )}
