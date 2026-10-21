@@ -475,10 +475,11 @@ function App() {
                         />
                       )}
                       {cat.title === "Earrings" && (
-                        <div className="flex gap-6">
-                          <div className="flex flex-col items-center"><div className="h-5 w-5 rounded-full border-2 border-pink-300" /><div className="h-16 w-3 bg-pink-400" /></div>
-                          <div className="flex flex-col items-center"><div className="h-5 w-5 rounded-full border-2 border-purple-300" /><div className="h-16 w-3 bg-purple-400" /></div>
-                        </div>
+                        <img
+                          src="/pumpkin-pie-earrings.png"
+                          alt="Pumpkin Pie Slice Earrings"
+                          className="h-full w-full object-contain p-2"
+                        />
                       )}
                     </div>
                     <div className="p-5">
