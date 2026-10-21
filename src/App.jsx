@@ -451,8 +451,8 @@ function App() {
               {categories.map((cat) => {
                 const Icon = cat.icon;
                 return (
-                  <button key={cat.title} onClick={() => openCategory(cat.title)} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] text-left transition hover:-translate-y-1 hover:border-amber-300/30 hover:bg-white/[0.07]">
-                    <div className="flex h-40 items-center justify-center bg-[#f7f3e8]">
+                  <button key={cat.title} onClick={() => openCategory(cat.title)} className="group flex h-full flex-col items-stretch justify-start overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] text-left transition hover:-translate-y-1 hover:border-amber-300/30 hover:bg-white/[0.07]">
+                    <div className="flex h-40 w-full shrink-0 items-center justify-center bg-[#f7f3e8]">
                       {cat.title === "3D Printed Trays" && (
                         <img
                           src="/honeycomb-tray.png"
@@ -482,11 +482,11 @@ function App() {
                         />
                       )}
                     </div>
-                    <div className="p-5">
+                    <div className="flex flex-1 flex-col p-5">
                       <Icon className="mb-4 text-amber-300" />
                       <h3 className="text-xl font-black">{cat.title}</h3>
                       <p className="mt-2 text-sm leading-6 text-white/55">{cat.text}</p>
-                      <p className="mt-4 text-sm font-bold text-white/45 transition group-hover:text-amber-300">Browse category →</p>
+                      <p className="mt-auto pt-4 text-sm font-bold text-white/45 transition group-hover:text-amber-300">Browse category →</p>
                     </div>
                   </button>
                 );
