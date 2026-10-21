@@ -63,7 +63,7 @@ const bestSellers = [
   },
   {
     name: "Monstera 3 Drawer Storage Box",
-    price: "$25.00",
+    price: "$35.00",
     description: "A botanical-inspired 3 drawer storage box designed to organize desks, craft supplies, accessories, and everyday essentials.",
     tag: "Storage Pick",
     image: "/monstera-3drawer.png",
