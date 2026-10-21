@@ -155,6 +155,8 @@ const faqs = [
 ];
 
 const galleryItems = [
+  { title: "Pumpkin Pie Slice Earrings", image: "/pumpkin-pie-earrings.png", type: "Seasonal Earrings" },
+  { title: "Christmas Tree Earrings", image: "/christmas-tree-earrings.png", type: "Holiday Earrings" },
   { title: "Honeycomb Desk Organizer", image: "/honeycomb-tray.png", type: "3D Printed Organizer" },
   { title: "Monstera Storage Box", image: "/monstera-3drawer.png", type: "Storage Box" },
   { title: "Monstera LED Wall Light", image: "/monstera-led.png", type: "LED Light" },
