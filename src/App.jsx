@@ -439,20 +439,20 @@ function App() {
         </section>
       )}
       {currentPage === "creations" && (
-        <section id="creations" className="border-t border-white/10 px-5 pt-40 pb-24">
+        <section id="creations" className="relative overflow-hidden border-t border-white/10 px-5 pb-24 pt-32 md:pt-36">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_8%,rgba(252,211,77,0.10),transparent_25%)]" />
           <div className="mx-auto max-w-7xl">
-            <SectionHeader
-              eyebrow="Creations"
-              title="Functional design, made to organize."
-              text="Choose a category below to browse current products."
-            />
+            <div className="relative mb-12 grid gap-7 border-b border-white/10 pb-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+              <div><p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300/70">Current creations</p><h1 className="brand-type mt-4 text-5xl font-black leading-[0.98] md:text-7xl">Useful by design.<br/><span className="text-amber-300">Distinct by nature.</span></h1></div>
+              <p className="text-lg leading-8 text-white/60">Browse ready-to-inquire pieces or start with a category. Every item is made in small batches with room for a personal touch.</p>
+            </div>
 
-            <div className="grid gap-5 md:grid-cols-4">
+            <div className="relative grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {categories.map((cat) => {
                 const Icon = cat.icon;
                 return (
-                  <button key={cat.title} onClick={() => openCategory(cat.title)} className="overflow-hidden rounded-sm border border-white/10 bg-neutral-900/70 text-left transition hover:-translate-y-1 hover:bg-white/[0.07] scale-90">
-                    <div className="flex h-36 items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
+                  <button key={cat.title} onClick={() => openCategory(cat.title)} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] text-left transition hover:-translate-y-1 hover:border-amber-300/30 hover:bg-white/[0.07]">
+                    <div className="flex h-40 items-center justify-center bg-[#f7f3e8]">
                       {cat.title === "3D Printed Trays" && (
                         <img
                           src="/honeycomb-tray.png"
@@ -481,33 +481,35 @@ function App() {
                         </div>
                       )}
                     </div>
-                    <div className="p-4">
-                      <Icon className="mb-5 text-white/75" />
-                      <h3 className="text-lg font-black">{cat.title}</h3>
-                      <p className="mt-2 text-xs leading-5 text-white/55">{cat.text}</p>
+                    <div className="p-5">
+                      <Icon className="mb-4 text-amber-300" />
+                      <h3 className="text-xl font-black">{cat.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-white/55">{cat.text}</p>
+                      <p className="mt-4 text-sm font-bold text-white/45 transition group-hover:text-amber-300">Browse category →</p>
                     </div>
                   </button>
                 );
               })}
             </div>
 
-            <div className="mt-16 grid gap-5 md:grid-cols-3">
+            <div className="relative mb-7 mt-16 flex items-end justify-between"><div><p className="text-xs font-black uppercase tracking-[0.25em] text-amber-300/70">Shop the workbench</p><h2 className="brand-type mt-2 text-3xl font-black md:text-4xl">Available pieces</h2></div><button onClick={() => setCurrentPage("contact")} className="hidden text-sm font-bold text-white/55 hover:text-white sm:block">Need something custom? →</button></div>
+            <div className="relative grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {bestSellers.map((item) => (
-                <div key={item.name} className="group rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:bg-white/[0.07]">
-                  <div className="mb-6 overflow-hidden rounded-sm border border-white/10 bg-neutral-900">
-                    <div className="flex h-52 items-center justify-center bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
+                <div key={item.name} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition hover:-translate-y-1 hover:border-amber-300/25 hover:bg-white/[0.07]">
+                  <div className="bg-[#f7f3e8]">
+                    <div className="flex h-64 items-center justify-center">
                       <img src={item.image} alt={item.name} className="h-full w-full object-contain p-2" />
                     </div>
                   </div>
-                  <div className="mb-3 inline-flex rounded-sm bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white/60">{item.tag}</div>
+                  <div className="p-6"><div className="mb-3 inline-flex rounded-full bg-amber-300/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-amber-200">{item.tag}</div>
                   <h3 className="text-2xl font-black">{item.name}</h3>
-                  <p className="mt-2 min-h-14 text-white/55">{item.description}</p>
+                  <p className="mt-2 min-h-14 leading-6 text-white/55">{item.description}</p>
                   <div className="mt-6 flex items-center justify-between">
                     <p className="text-xl font-black">{item.price}</p>
-                    <button onClick={() => openProduct(item, "creations")} className="rounded-sm border border-white/15 px-4 py-2 text-sm font-bold transition group-hover:bg-white group-hover:text-neutral-950">
-                      View Product
+                    <button onClick={() => openProduct(item, "creations")} className="rounded-full border border-white/15 px-4 py-2 text-sm font-bold transition group-hover:bg-amber-300 group-hover:text-neutral-950">
+                      View piece
                     </button>
-                  </div>
+                  </div></div>
                 </div>
               ))}
             </div>
@@ -516,13 +518,14 @@ function App() {
       )}
 
       {currentPage === "category" && (
-        <section id="category" className="border-t border-white/10 px-5 pb-24 pt-32">
+        <section id="category" className="relative overflow-hidden border-t border-white/10 px-5 pb-24 pt-32">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_5%,rgba(252,211,77,0.10),transparent_25%)]" />
           <div className="mx-auto max-w-7xl">
-            <SectionHeader eyebrow="Shop Category" title={selectedCategory || "Products"} text="Browse products in this category." />
-            <div className="mb-14 flex justify-start">
+            <div className="relative mb-12 border-b border-white/10 pb-10"><p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300/70">Shop category</p><h1 className="brand-type mt-4 text-5xl font-black md:text-7xl">{selectedCategory || "Products"}</h1><p className="mt-4 text-lg text-white/60">Browse what’s currently on the workbench in this collection.</p></div>
+            <div className="relative mb-10 flex justify-start">
               <button
                 onClick={() => setCurrentPage("creations")}
-                className="rounded-sm border border-white/15 bg-white/5 px-6 py-3 text-xl font-black text-white transition hover:bg-white hover:text-neutral-950"
+                className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-black text-white transition hover:bg-white hover:text-neutral-950"
               >
                 ← Back
               </button>
@@ -649,25 +652,26 @@ function App() {
       )}
 
       {currentPage === "services" && (
-        <section id="services" className="bg-neutral-950 px-5 pt-40 pb-24 text-white">
+        <section id="services" className="relative overflow-hidden bg-neutral-950 px-5 pb-24 pt-32 text-white md:pt-36">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_10%,rgba(252,211,77,0.10),transparent_25%)]" />
           <div className="mx-auto max-w-7xl">
-            <SectionHeader eyebrow="Services" title="Whatever it is, make it stand out." text="Custom stickers, vinyl decals, logo design, 3D prints, laser engraving, and vinyl-pressed shirts." />
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <div className="relative mb-14 max-w-4xl"><p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300/70">What we make</p><h1 className="brand-type mt-4 text-5xl font-black leading-[0.98] md:text-7xl">One shop. <span className="text-amber-300">A lot of possibilities.</span></h1><p className="mt-6 max-w-3xl text-lg leading-8 text-white/60">From a rough idea to a finished object, graphic, garment, or sign—we help choose the right process and make it real.</p></div>
+            <div className="relative grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {services.map((service) => {
                 const Icon = service.icon;
                 return (
                   <button
                     key={service.title}
                     onClick={() => openService(service)}
-                    className="flex h-full w-full flex-col overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-0 text-left align-top transition hover:-translate-y-1 hover:bg-white/[0.07]"
+                    className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-0 text-left align-top transition hover:-translate-y-1 hover:border-amber-300/30 hover:bg-white/[0.07]"
                   >
-                    <div className="m-0 flex h-48 w-full items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
-                      <Icon size={72} className="text-white/70" />
+                    <div className="m-0 flex h-44 w-full items-center justify-center border-b border-white/10 bg-gradient-to-br from-amber-300/15 via-neutral-900 to-neutral-950">
+                      <Icon size={64} className="text-amber-300" />
                     </div>
                     <div className="p-7">
-                      <div className="mb-6 grid h-14 w-14 place-items-center rounded-sm border border-white/10 bg-neutral-900 text-white"><Icon /></div>
                       <h3 className="text-2xl font-black">{service.title}</h3>
                       <p className="mt-4 leading-7 text-white/60">{service.text}</p>
+                      <p className="mt-6 text-sm font-bold text-white/45 transition group-hover:text-amber-300">Explore service →</p>
                     </div>
                   </button>
                 );
@@ -678,49 +682,50 @@ function App() {
       )}
 
       {currentPage === "serviceDetail" && selectedService && (
-        <section id="service-detail" className="border-y border-white/10 px-5 pt-44 pb-24">
+        <section id="service-detail" className="relative overflow-hidden border-y border-white/10 px-5 pb-24 pt-32 md:pt-36">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_12%,rgba(252,211,77,0.10),transparent_28%)]" />
           <div className="mx-auto max-w-7xl">
             <div className="mb-10 flex justify-start">
               <button
                 onClick={() => setCurrentPage("services")}
-                className="rounded-sm border border-white/15 bg-white/5 px-6 py-3 text-xl font-black text-white transition hover:bg-white hover:text-neutral-950"
+                className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-black text-white transition hover:bg-white hover:text-neutral-950"
               >
                 ← Back
               </button>
             </div>
 
-            <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-start">
-              <div className="rounded-md border border-white/10 bg-white/[0.04] p-8">
-                <div className="mb-8 grid h-20 w-20 place-items-center rounded-sm border border-white/10 bg-neutral-900 text-white">
+            <div className="relative grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+              <div className="rounded-[2rem] border border-amber-300/20 bg-gradient-to-br from-amber-300/15 via-white/[0.04] to-white/[0.02] p-7 md:p-9">
+                <div className="mb-8 grid h-20 w-20 place-items-center rounded-2xl bg-amber-300 text-neutral-950">
                   {React.createElement(selectedService.icon, { size: 42 })}
                 </div>
-                <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-white/45">Service</p>
-                <h2 className="text-5xl font-black tracking-tight text-white">{selectedService.title}</h2>
-                <p className="mt-5 text-2xl leading-10 text-white/60">{selectedService.text}</p>
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-amber-300/75">Service</p>
+                <h1 className="brand-type text-4xl font-black tracking-tight text-white md:text-5xl">{selectedService.title}</h1>
+                <p className="mt-5 text-lg leading-8 text-white/65">{selectedService.text}</p>
                 <button
                   onClick={() => setCurrentPage("contact")}
-                  className="mt-8 inline-flex items-center justify-center gap-3 rounded-sm bg-white px-8 py-4 text-2xl font-black text-neutral-950 transition hover:bg-white/90"
+                  className="mt-8 inline-flex items-center justify-center gap-3 rounded-full bg-amber-300 px-7 py-4 text-lg font-black text-neutral-950 transition hover:-translate-y-0.5 hover:bg-amber-200"
                 >
                   Request a Quote <ArrowRight size={18} />
                 </button>
               </div>
 
               <div className="space-y-8">
-                <div className="rounded-md border border-white/10 bg-white/[0.04] p-8">
-                  <h3 className="text-4xl font-black text-white">About This Service</h3>
-                  <div className="mt-6 space-y-5 text-xl leading-9 text-white/65">
+                <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 md:p-9">
+                  <h2 className="brand-type text-3xl font-black text-white">About this service</h2>
+                  <div className="mt-6 space-y-5 text-lg leading-8 text-white/65">
                     {selectedService.details.map((paragraph, index) => (
                       <p key={index}>{paragraph}</p>
                     ))}
                   </div>
                 </div>
 
-                <div className="rounded-md border border-white/10 bg-white/[0.04] p-8">
-                  <h3 className="text-4xl font-black text-white">Common Uses</h3>
+                <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 md:p-9">
+                  <h2 className="brand-type text-3xl font-black text-white">Common uses</h2>
                   <div className="mt-6 grid gap-3 sm:grid-cols-2">
                     {selectedService.includes.map((item) => (
-                      <div key={item} className="rounded-sm border border-white/10 bg-neutral-900 px-5 py-4 text-xl font-bold text-white/70">
-                        {item}
+                      <div key={item} className="flex items-center gap-3 rounded-xl border border-white/10 bg-neutral-950/50 px-5 py-4 font-bold text-white/70">
+                        <Check size={18} className="shrink-0 text-amber-300" /> {item}
                       </div>
                     ))}
                   </div>
@@ -747,32 +752,29 @@ function App() {
       )}
 
       {currentPage === "process" && (
-        <section id="process" className="border-y border-white/10 px-5 pt-40 pb-24">
+        <section id="process" className="relative overflow-hidden border-y border-white/10 px-5 pb-24 pt-32 md:pt-36">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(252,211,77,0.10),transparent_25%)]" />
           <div className="mx-auto max-w-7xl">
-            <SectionHeader
-              eyebrow="How It Works"
-              title="From idea to finished piece."
-              text="A simple process for custom work, small-batch products, and creative projects."
-            />
+            <div className="relative mb-14 max-w-4xl"><p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300/70">How it works</p><h1 className="brand-type mt-4 text-5xl font-black leading-[0.98] md:text-7xl">From “what if?” to <span className="text-amber-300">made.</span></h1><p className="mt-6 text-lg leading-8 text-white/60">A clear, collaborative path for custom work, small-batch products, and creative projects.</p></div>
 
-            <div className="grid gap-5 md:grid-cols-5">
+            <div className="relative grid gap-4 md:grid-cols-5">
               {processSteps.map((item) => (
-                <div key={item.step} className="rounded-md border border-white/10 bg-white/[0.04] p-6">
-                  <p className="text-5xl font-black text-white/20">{item.step}</p>
+                <div key={item.step} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-amber-300/25 hover:bg-white/[0.07]">
+                  <p className="text-5xl font-black text-amber-300/30">{item.step}</p>
                   <h3 className="mt-5 text-2xl font-black text-white">{item.title}</h3>
                   <p className="mt-4 leading-7 text-white/60">{item.text}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-14 rounded-md border border-white/10 bg-white/[0.04] p-8 text-center">
-              <h3 className="text-4xl font-black text-white">Ready to start?</h3>
-              <p className="mx-auto mt-4 max-w-3xl text-2xl leading-10 text-white/60">
+            <div className="relative mt-14 rounded-[2rem] bg-amber-300 p-8 text-center text-neutral-950 md:p-12">
+              <h2 className="brand-type text-4xl font-black">Ready to start?</h2>
+              <p className="mx-auto mt-4 max-w-3xl text-lg font-semibold leading-8 text-neutral-700">
                 Send the idea first. We’ll help figure out what’s realistic, what it may cost, and what information we need next.
               </p>
               <button
                 onClick={() => setCurrentPage("contact")}
-                className="mt-8 rounded-sm bg-white px-8 py-4 text-2xl font-black text-neutral-950 transition hover:bg-white/90"
+                className="mt-8 rounded-full bg-neutral-950 px-8 py-4 text-lg font-black text-white transition hover:-translate-y-0.5 hover:bg-neutral-800"
               >
                 Start a Custom Order
               </button>
@@ -782,27 +784,24 @@ function App() {
       )}
 
       {currentPage === "faq" && (
-        <section id="faq" className="border-y border-white/10 px-5 pt-40 pb-24">
-          <div className="mx-auto max-w-5xl">
-            <SectionHeader
-              eyebrow="FAQ"
-              title="Common questions."
-              text="A quick guide before you place an order or request a custom project."
-            />
+        <section id="faq" className="relative overflow-hidden border-y border-white/10 px-5 pb-24 pt-32 md:pt-36">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_8%,rgba(252,211,77,0.10),transparent_25%)]" />
+          <div className="relative mx-auto max-w-5xl">
+            <div className="mb-12"><p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300/70">Good to know</p><h1 className="brand-type mt-4 text-5xl font-black leading-[0.98] md:text-7xl">Questions, <span className="text-amber-300">answered.</span></h1><p className="mt-6 max-w-2xl text-lg leading-8 text-white/60">A practical guide before you place an order or bring us a custom idea.</p></div>
 
-            <div className="space-y-5">
-              {faqs.map((item) => (
-                <div key={item.question} className="rounded-md border border-white/10 bg-white/[0.04] p-7">
-                  <h3 className="text-3xl font-black text-white">{item.question}</h3>
-                  <p className="mt-4 text-xl leading-8 text-white/60">{item.answer}</p>
-                </div>
+            <div className="space-y-3">
+              {faqs.map((item, index) => (
+                <details key={item.question} className="group rounded-2xl border border-white/10 bg-white/[0.04] p-6 open:border-amber-300/25 open:bg-white/[0.07]">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-left"><span className="flex items-center gap-4"><span className="text-sm font-black text-amber-300/60">{String(index + 1).padStart(2, "0")}</span><span className="text-xl font-black text-white md:text-2xl">{item.question}</span></span><span className="text-2xl text-amber-300 transition group-open:rotate-45">+</span></summary>
+                  <p className="ml-10 mt-5 max-w-3xl text-lg leading-8 text-white/60">{item.answer}</p>
+                </details>
               ))}
             </div>
 
-            <div className="mt-12 text-center">
+            <div className="mt-12 rounded-2xl border border-white/10 bg-white/[0.04] p-7 text-center">
               <button
                 onClick={() => setCurrentPage("contact")}
-                className="rounded-sm bg-white px-8 py-4 text-2xl font-black text-neutral-950 transition hover:bg-white/90"
+                className="rounded-full bg-amber-300 px-7 py-4 text-lg font-black text-neutral-950 transition hover:-translate-y-0.5 hover:bg-amber-200"
               >
                 Still Have a Question?
               </button>
@@ -875,26 +874,33 @@ function App() {
       )}
 
       {currentPage === "about" && (
-        <section id="about" className="border-y border-white/10 px-5 pt-40 pb-24">
-          <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-start">
-            <div className="mt-28 rounded-md border border-white/10 bg-white/[0.04] p-8">
-              <p className="text-sm font-bold uppercase tracking-[0.3em] text-white/45">About</p>
-              <h2 className="mt-4 text-4xl font-black tracking-tight">Started with one printer and a good idea.</h2>
+        <section id="about" className="relative overflow-hidden border-y border-white/10 px-5 pb-24 pt-32 md:pt-36">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(252,211,77,0.10),transparent_25%)]" />
+          <div className="relative mx-auto max-w-7xl">
+            <div className="mb-14 grid gap-8 border-b border-white/10 pb-12 md:grid-cols-[1.15fr_0.85fr] md:items-end"><div><p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300/70">Our story</p><h1 className="brand-type mt-4 text-5xl font-black leading-[0.98] md:text-7xl">One printer.<br/><span className="text-amber-300">One good idea.</span></h1></div><p className="text-lg leading-8 text-white/60">A husband-and-wife maker team turning practical needs and creative sparks into thoughtful, useful things.</p></div>
+            <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+            <div className="rounded-[2rem] border border-amber-300/20 bg-amber-300 p-8 text-neutral-950">
+              <img src="/logo.gif" alt="Makeshift Creations Co." className="h-24 w-24 rounded-full border-4 border-neutral-950 object-cover" />
+              <p className="mt-8 text-sm font-black uppercase tracking-[0.2em]">What guides us</p>
+              <h2 className="brand-type mt-3 text-4xl font-black tracking-tight">Listen first. Think it through. Make it well.</h2>
+              <button onClick={() => setCurrentPage("contact")} className="mt-8 rounded-full bg-neutral-950 px-6 py-3.5 font-black text-white">Work with us →</button>
             </div>
-            <div className="space-y-6 text-xl leading-9 text-white/70">
+            <div className="space-y-6 rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 text-lg leading-8 text-white/70 md:p-10">
               <p>Makeshift Creations Co. started with a single 3D printer and a simple idea.</p>
               <p>After receiving a 3D printer as a Christmas gift, we began designing organizers and storage drawers for our own use. When friends and family saw them, the response was immediate. People loved the designs and started asking if we were selling them. With encouragement from those around us and a realization that there was a real need for well-made, thoughtful solutions, Makeshift Creations Co. was born.</p>
               <p>We’re a small, husband-and-wife team focused on problem solving and creativity. She handles networking and creative inspiration, helping shape ideas and connect with people. He focuses on 3D modeling, learning the machines, and crafting each product with care. Together, we combine imagination and technical skill to bring ideas to life.</p>
               <p>What matters most to us is taking the time to get the details right. Whether it’s a custom 3D print, vinyl decal, sticker, apparel piece, or logo design, we approach every project with the same mindset: listen first, think it through, and create something that truly works for the person who asked for it. We don’t mass-produce. We make things intentionally.</p>
               <p>We primarily work with small businesses, fellow makers, and individuals who have an idea but aren’t sure how to turn it into something real. If you come to us unsure whether your idea is possible, our goal is for you to leave excited and confident handing it off, knowing it’s in good hands.</p>
               <p>Makeshift Creations Co. is growing steadily and carefully, expanding our tools and capabilities as we go. We’re proud to stay hands-on, flexible, and personal, and we’ll always do everything we can to help make your ideas a reality.</p>
-            </div>
+            </div></div>
           </div>
         </section>
       )}
 
       {currentPage === "contact" && (
-        <section id="contact" className="px-5 pt-40 pb-24">
+        <section id="contact" className="relative overflow-hidden px-5 pb-24 pt-32 md:pt-36">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_10%,rgba(252,211,77,0.12),transparent_28%)]" />
+          <div className="relative mx-auto mb-10 max-w-7xl"><p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300/70">Let’s make it</p><h1 className="brand-type mt-4 text-5xl font-black leading-[0.98] md:text-7xl">Bring us the <span className="text-amber-300">rough idea.</span></h1><p className="mt-5 max-w-2xl text-lg leading-8 text-white/60">You don’t need a finished design or perfect plan. Start with what you know and we’ll help shape the next step.</p></div>
           <div className="mx-auto max-w-7xl rounded-[2rem] bg-[#f7f3e8] p-6 text-neutral-950 shadow-2xl shadow-black/30 md:p-12">
             <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr]">
               <div>
@@ -906,6 +912,7 @@ function App() {
                   <a href="tel:7253085837" className="flex items-center gap-3 transition hover:text-neutral-950"><Phone className="shrink-0" size={20} /> (725) 308-5837</a>
                   <div className="flex items-center gap-3"><MapPin className="shrink-0" size={20} /> Las Vegas, NV</div>
                 </div>
+                <div className="mt-8 grid grid-cols-2 gap-3 text-sm font-bold text-neutral-600"><div className="rounded-xl bg-white p-4">Reference photos</div><div className="rounded-xl bg-white p-4">Rough measurements</div><div className="rounded-xl bg-white p-4">Colors or style</div><div className="rounded-xl bg-white p-4">Ideal deadline</div></div>
               </div>
               <div className="flex flex-col items-start gap-6">
                 <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm md:p-8">
