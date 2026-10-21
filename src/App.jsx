@@ -23,7 +23,6 @@ const navItems = [
   { label: "Home", page: "home" },
   { label: "Creations", page: "creations" },
   { label: "Services", page: "services" },
-  { label: "Calculator", page: "calculator" },
   { label: "Process", page: "process" },
   { label: "FAQ", page: "faq" },
   { label: "Gallery", page: "gallery" },
