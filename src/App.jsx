@@ -554,8 +554,8 @@ function App() {
               <button onClick={() => setCurrentPage("creations")} className="transition hover:text-amber-300">Creations</button>
               <span>/</span>
               <button onClick={() => { setSelectedCategory(selectedProduct.category); setCurrentPage("category"); }} className="transition hover:text-amber-300">{selectedProduct.category}</button>
-              <span>/</span>
-              <span className="truncate text-white/70">{selectedProduct.name}</span>
+              <span className="hidden sm:inline">/</span>
+              <span className="hidden truncate text-white/70 sm:inline">{selectedProduct.name}</span>
             </div>
 
             <div className="relative grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
