@@ -812,33 +812,63 @@ function App() {
       )}
 
       {currentPage === "gallery" && (
-        <section id="gallery" className="border-y border-white/10 px-5 pt-40 pb-24">
+        <section id="gallery" className="relative overflow-hidden border-y border-white/10 px-5 pb-24 pt-32 md:pt-36">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_12%,rgba(252,211,77,0.10),transparent_26%)]" />
           <div className="mx-auto max-w-7xl">
-            <SectionHeader
-              eyebrow="Gallery"
-              title="Recent work and product previews."
-              text="A growing look at finished pieces, product photos, and custom project examples."
-            />
+            <div className="relative mb-14 grid gap-8 border-b border-white/10 pb-12 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300/70">From the workbench</p>
+                <h1 className="brand-type mt-4 max-w-4xl text-5xl font-black leading-[0.98] tracking-tight text-white md:text-7xl">
+                  Ideas made <span className="text-amber-300">real.</span>
+                </h1>
+              </div>
+              <div className="md:pb-2">
+                <p className="text-lg leading-8 text-white/60">A closer look at finished pieces, current creations, and the range of ideas we can help bring to life.</p>
+                <button onClick={() => setCurrentPage("contact")} className="mt-6 inline-flex items-center gap-2 rounded-full bg-amber-300 px-6 py-3 font-black text-neutral-950 transition hover:-translate-y-0.5 hover:bg-amber-200">
+                  Start your own project <ArrowRight size={18} />
+                </button>
+              </div>
+            </div>
 
-            <div className="grid gap-5 md:grid-cols-3">
-              {galleryItems.map((item) => (
-                <div key={item.title} className="overflow-hidden rounded-md border border-white/10 bg-white/[0.04]">
-                  <div className="flex h-72 items-center justify-center border-b border-white/10 bg-gradient-to-br from-neutral-800 via-neutral-700 to-neutral-900">
-                    {item.image ? (
-                      <img src={item.image} alt={item.title} className="h-full w-full object-contain p-3" />
-                    ) : (
-                      <div className="text-center">
-                        <Sparkles className="mx-auto mb-4 text-white/40" size={60} />
-                        <p className="text-2xl font-black text-white/50">More coming soon</p>
+            <div className="relative grid gap-5 md:grid-cols-2 lg:grid-cols-12">
+              {galleryItems.filter((item) => item.image).map((item, index) => {
+                const product = bestSellers.find((candidate) => candidate.image === item.image);
+                const layoutClass = index === 0 || index === 3 ? "lg:col-span-7" : index === 1 || index === 2 ? "lg:col-span-5" : "lg:col-span-4";
+                return (
+                  <button
+                    key={item.title}
+                    onClick={() => product ? openProduct(product, "gallery") : setCurrentPage("contact")}
+                    className={`group overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] text-left transition hover:-translate-y-1 hover:border-amber-300/30 hover:bg-white/[0.07] ${layoutClass}`}
+                  >
+                    <div className={`relative flex items-center justify-center overflow-hidden bg-[#f7f3e8] ${index < 4 ? "h-80 md:h-[26rem]" : "h-72"}`}>
+                      <span className="absolute left-5 top-5 z-10 rounded-full bg-neutral-950/80 px-3 py-1.5 text-xs font-black tracking-[0.18em] text-white backdrop-blur">{String(index + 1).padStart(2, "0")}</span>
+                      <img src={item.image} alt={item.title} className="h-full w-full object-contain p-5 transition duration-500 group-hover:scale-[1.03]" />
+                      <span className="absolute bottom-5 right-5 translate-y-2 rounded-full bg-amber-300 px-4 py-2 text-sm font-black text-neutral-950 opacity-0 shadow-lg transition group-hover:translate-y-0 group-hover:opacity-100">View piece →</span>
+                    </div>
+                    <div className="flex min-h-32 items-end justify-between gap-4 p-6">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-[0.22em] text-amber-300/65">{item.type}</p>
+                        <h2 className="mt-2 text-2xl font-black text-white">{item.title}</h2>
                       </div>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <p className="text-sm font-bold uppercase tracking-[0.25em] text-white/45">{item.type}</p>
-                    <h3 className="mt-3 text-2xl font-black text-white">{item.title}</h3>
-                  </div>
+                      <ArrowRight className="shrink-0 text-white/30 transition group-hover:translate-x-1 group-hover:text-amber-300" />
+                    </div>
+                  </button>
+                );
+              })}
+
+              <div className="flex min-h-[24rem] flex-col justify-between rounded-[1.75rem] border border-amber-300/20 bg-amber-300 p-7 text-neutral-950 lg:col-span-12 md:p-10">
+                <div className="flex items-start justify-between gap-6">
+                  <Sparkles size={42} />
+                  <span className="rounded-full border border-neutral-950/20 px-4 py-2 text-xs font-black uppercase tracking-[0.18em]">Your idea here</span>
                 </div>
-              ))}
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[0.2em] text-neutral-700">Custom work welcome</p>
+                  <h2 className="brand-type mt-3 max-w-2xl text-4xl font-black leading-tight md:text-5xl">See something you like—or have something completely different in mind?</h2>
+                  <button onClick={() => setCurrentPage("contact")} className="mt-7 inline-flex items-center gap-2 rounded-full bg-neutral-950 px-6 py-3.5 font-black text-white transition hover:-translate-y-0.5 hover:bg-neutral-800">
+                    Tell us about it <ArrowRight size={18} />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </section>
