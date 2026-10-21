@@ -244,51 +244,53 @@ const services = [
 function Header({ currentPage, setCurrentPage }) {
   const [open, setOpen] = useState(false);
 
+  const navigate = (page) => {
+    setCurrentPage(page);
+    setOpen(false);
+  };
+
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-neutral-950/85 backdrop-blur-xl">
-      <div className="relative mx-auto flex max-w-7xl flex-col items-start px-5 pt-8 pb-2">
-        <button onClick={() => setCurrentPage("home")} className="group flex items-center">
-          <div className="text-left leading-none text-white transition group-hover:text-white/80">
-            <p className="text-6xl font-black tracking-tight whitespace-nowrap">
-              Makeshift Creations Co.
-            </p>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-neutral-950/90 backdrop-blur-xl">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-5">
+        <button onClick={() => navigate("home")} className="group flex items-center gap-3 text-left" aria-label="Makeshift Creations Co. home">
+          <img src="/logo.gif" alt="" className="h-12 w-12 rounded-full border border-white/15 bg-white object-cover transition group-hover:rotate-3" />
+          <div className="leading-tight">
+            <p className="brand-type text-lg font-black tracking-tight text-white sm:text-xl">Makeshift Creations Co.</p>
+            <p className="hidden text-xs font-semibold uppercase tracking-[0.18em] text-amber-300/75 sm:block">Made in Las Vegas</p>
           </div>
         </button>
 
-        <nav className="mt-10 hidden w-full items-center justify-start gap-12 pb-2 md:flex">
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
           {navItems.map((item) => (
             <button
               key={item.label}
-              onClick={() => setCurrentPage(item.page)}
-              className={`text-3xl font-medium transition hover:text-white ${currentPage === item.page ? "text-white" : "text-white/70"}`}
+              onClick={() => navigate(item.page)}
+              className={`rounded-full px-3 py-2 text-sm font-semibold transition hover:bg-white/10 hover:text-white ${currentPage === item.page ? "bg-white/10 text-white" : "text-white/60"}`}
             >
               {item.label}
             </button>
           ))}
           <button
-            onClick={() => setCurrentPage("contact")}
-            className="absolute right-5 top-2 rounded-sm bg-white px-6 py-3 text-lg font-bold text-neutral-950 transition hover:bg-white/90"
+            onClick={() => navigate("contact")}
+            className="ml-2 rounded-full bg-amber-300 px-5 py-2.5 text-sm font-black text-neutral-950 transition hover:bg-amber-200"
           >
             Get a Quote
           </button>
         </nav>
 
-        <button onClick={() => setOpen(!open)} className="rounded-sm border border-white/10 p-2 text-white md:hidden" aria-label="Toggle menu">
+        <button onClick={() => setOpen(!open)} className="rounded-full border border-white/15 p-2.5 text-white lg:hidden" aria-label="Toggle menu" aria-expanded={open}>
           {open ? <X /> : <Menu />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-neutral-950 px-5 py-4 md:hidden">
-          <div className="flex flex-col gap-4">
+        <div className="border-t border-white/10 bg-neutral-950 px-5 py-5 lg:hidden">
+          <div className="mx-auto grid max-w-7xl grid-cols-2 gap-2 sm:grid-cols-3">
             {navItems.map((item) => (
               <button
                 key={item.label}
-                onClick={() => {
-                  setCurrentPage(item.page);
-                  setOpen(false);
-                }}
-                className="text-left text-white/75"
+                onClick={() => navigate(item.page)}
+                className={`rounded-xl px-4 py-3 text-left text-sm font-bold ${currentPage === item.page ? "bg-amber-300 text-neutral-950" : "bg-white/5 text-white/75"}`}
               >
                 {item.label}
               </button>
@@ -342,39 +344,38 @@ function App() {
   }, [currentPage]);
 
   return (
-    <main className="min-h-screen bg-neutral-950 text-white" style={{ fontFamily: "'Gaegu', cursive" }}>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap');`}</style>
+    <main className="min-h-screen bg-neutral-950 text-white">
       <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
       {currentPage === "home" && (
-        <section id="home" className="relative overflow-hidden px-5 pb-24 pt-36 md:pt-44">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.16),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.08),transparent_30%)]" />
-          <div className="absolute left-1/2 top-28 h-72 w-72 -translate-x-1/2 rounded-sm bg-white/5 blur-3xl" />
+        <section id="home" className="relative overflow-hidden px-5 pb-24 pt-32 md:pt-40">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(252,211,77,0.15),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.10),transparent_30%)]" />
+          <div className="absolute left-1/2 top-28 h-72 w-72 -translate-x-1/2 rounded-full bg-amber-300/5 blur-3xl" />
 
           <div className="relative mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <div className="mb-6 inline-flex items-center gap-3 rounded-sm border border-white/10 bg-white/5 px-6 py-3 text-xl font-medium text-white">
-                <Sparkles size={24} /> Handmade goods. Custom work. Built with personality.
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-sm font-bold text-amber-100">
+                <Sparkles size={17} /> Handmade goods · Custom work · Built with personality
               </div>
-              <h1 className="text-5xl font-black leading-[0.95] tracking-tight md:text-7xl">
-                Create. Customize. <span className="text-white/55">Inspire.</span>
+              <h1 className="brand-type text-5xl font-black leading-[0.98] tracking-tight md:text-7xl lg:text-8xl">
+                Useful things,<br /><span className="text-amber-300">made memorable.</span>
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/65 md:text-xl">
                 Functional 3D printed organizers, trays, accessories, decals, stickers, shirts, and custom design work — made with care by Makeshift Creations Co.
               </p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-                <button onClick={() => setCurrentPage("creations")} className="inline-flex items-center justify-center gap-2 rounded-sm bg-white px-6 py-3 font-bold text-neutral-950 transition hover:bg-white/90">
-                  Shop Creations <ArrowRight size={18} />
+                <button onClick={() => setCurrentPage("creations")} className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-300 px-6 py-3.5 font-black text-neutral-950 transition hover:-translate-y-0.5 hover:bg-amber-200">
+                  Browse Creations <ArrowRight size={18} />
                 </button>
-                <button onClick={() => setCurrentPage("services")} className="inline-flex items-center justify-center rounded-sm border border-white/15 px-6 py-3 font-bold text-white transition hover:bg-white/10">
+                <button onClick={() => setCurrentPage("services")} className="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3.5 font-bold text-white transition hover:bg-white/10">
                   Explore Services
                 </button>
               </div>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }} className="relative">
-              <div className="rounded-md border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/40">
-                <div className="overflow-hidden rounded-sm bg-white text-neutral-950">
+              <div className="rotate-1 rounded-[2rem] border border-white/10 bg-white/[0.05] p-3 shadow-2xl shadow-black/40 transition hover:rotate-0">
+                <div className="overflow-hidden rounded-[1.4rem] bg-[#f7f3e8] text-neutral-950">
                   <div className="flex h-64 items-center justify-center bg-gradient-to-br from-amber-200 via-orange-100 to-yellow-50">
                     <img
                       src="/honeycomb-tray.png"
@@ -391,7 +392,7 @@ function App() {
                       <p className="text-3xl font-black">$40.00</p>
                       <button
                         onClick={() => openProduct(bestSellers.find((item) => item.name === "Honeycomb Desk Organizer Storage Tray"), "home")}
-                        className="rounded-sm bg-neutral-950 px-5 py-2 text-sm font-bold text-white transition hover:bg-neutral-800"
+                        className="rounded-full bg-neutral-950 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-neutral-800"
                       >
                         View Product
                       </button>
@@ -510,7 +511,7 @@ function App() {
       )}
 
       {currentPage === "category" && (
-        <section id="category" className="border-t border-white/10 px-5 py-24">
+        <section id="category" className="border-t border-white/10 px-5 pb-24 pt-32">
           <div className="mx-auto max-w-7xl">
             <SectionHeader eyebrow="Shop Category" title={selectedCategory || "Products"} text="Browse products in this category." />
             <div className="mb-14 flex justify-start">
@@ -800,23 +801,23 @@ function App() {
 
       {currentPage === "contact" && (
         <section id="contact" className="px-5 pt-40 pb-24">
-          <div className="mx-auto max-w-7xl rounded-md bg-white p-8 text-neutral-950 md:p-12">
+          <div className="mx-auto max-w-7xl rounded-[2rem] bg-[#f7f3e8] p-6 text-neutral-950 shadow-2xl shadow-black/30 md:p-12">
             <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr]">
               <div>
-                <p className="text-3xl font-black uppercase tracking-[0.3em] text-neutral-400">Contact</p>
-                <h2 className="mt-4 text-6xl font-black tracking-tight md:text-7xl">Ready to make something?</h2>
-                <p className="mt-5 text-3xl font-bold leading-[1.6] text-neutral-600">Send the details, reference photos, size needs, colors, and deadline. We’ll help shape the idea into a quote.</p>
-                <div className="mt-8 space-y-6 text-3xl font-bold text-neutral-700">
-                  <a href="mailto:makeshiftcreationsco@gmail.com" className="flex items-center gap-4 text-3xl font-bold transition hover:text-neutral-950"><Mail size={20} /> makeshiftcreationsco@gmail.com</a>
-                  <a href="tel:7253085837" className="flex items-center gap-4 text-3xl font-bold transition hover:text-neutral-950"><Phone size={20} /> (725) 308-5837</a>
-                  <div className="flex items-center gap-4 text-3xl font-bold"><MapPin size={20} /> Las Vegas, NV</div>
+                <p className="text-sm font-black uppercase tracking-[0.3em] text-amber-700">Contact</p>
+                <h2 className="brand-type mt-4 text-4xl font-black tracking-tight sm:text-5xl md:text-6xl">Ready to make something?</h2>
+                <p className="mt-5 text-lg font-semibold leading-8 text-neutral-600 md:text-xl">Send the details, reference photos, size needs, colors, and deadline. We’ll help shape the idea into a quote.</p>
+                <div className="mt-8 space-y-4 text-base font-bold text-neutral-700 sm:text-lg">
+                  <a href="mailto:makeshiftcreationsco@gmail.com" className="flex items-center gap-3 break-all transition hover:text-neutral-950"><Mail className="shrink-0" size={20} /> makeshiftcreationsco@gmail.com</a>
+                  <a href="tel:7253085837" className="flex items-center gap-3 transition hover:text-neutral-950"><Phone className="shrink-0" size={20} /> (725) 308-5837</a>
+                  <div className="flex items-center gap-3"><MapPin className="shrink-0" size={20} /> Las Vegas, NV</div>
                 </div>
               </div>
               <div className="flex flex-col items-start gap-6">
-                <div className="rounded-sm border border-neutral-200 bg-neutral-50 p-8">
-                  <h3 className="text-4xl font-black text-neutral-950">Start Your Project</h3>
-                  <p className="mt-4 text-2xl font-bold leading-10 text-neutral-600">Fill out our detailed project inquiry form and we’ll get back to you with pricing, recommendations, and next steps.</p>
-                  <a href="https://formspace.club/f/7e253da8-1676-45cc-be5a-cd773efbbc45" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center gap-3 rounded-sm bg-neutral-950 px-8 py-5 text-3xl font-black text-white transition hover:bg-neutral-800">
+                <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm md:p-8">
+                  <h3 className="brand-type text-3xl font-black text-neutral-950 md:text-4xl">Start Your Project</h3>
+                  <p className="mt-4 text-lg font-semibold leading-8 text-neutral-600 md:text-xl">Fill out our detailed project inquiry form and we’ll get back to you with pricing, recommendations, and next steps.</p>
+                  <a href="https://formspace.club/f/7e253da8-1676-45cc-be5a-cd773efbbc45" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center gap-3 rounded-full bg-neutral-950 px-7 py-4 text-lg font-black text-white transition hover:-translate-y-0.5 hover:bg-neutral-800">
                     Open Inquiry Form <ArrowRight size={18} />
                   </a>
                 </div>
