@@ -31,6 +31,8 @@ const navItems = [
   { label: "Contact", page: "contact" },
 ];
 
+const inquiryUrl = "https://formspace.club/f/7e253da8-1676-45cc-be5a-cd773efbbc45";
+
 const bestSellers = [
   {
     name: "Pumpkin Pie Slice Earrings",
@@ -38,7 +40,7 @@ const bestSellers = [
     description: "Playful pumpkin pie slice earrings with a dollop of whipped cream — a lightweight seasonal accessory for fall and Thanksgiving.",
     tag: "Fall Favorite",
     image: "/pumpkin-pie-earrings.png",
-    link: "https://formspace.club/f/7e253da8-1676-45cc-be5a-cd773efbbc45",
+    link: inquiryUrl,
     category: "Earrings",
   },
   {
@@ -47,7 +49,7 @@ const bestSellers = [
     description: "Festive Christmas tree earrings with red ornaments and a bright yellow star — lightweight holiday style with handmade personality.",
     tag: "Holiday Pick",
     image: "/christmas-tree-earrings.png",
-    link: "https://formspace.club/f/7e253da8-1676-45cc-be5a-cd773efbbc45",
+    link: inquiryUrl,
     category: "Earrings",
   },
   {
@@ -56,7 +58,7 @@ const bestSellers = [
     description: "A tropical-inspired LED wall light with a soft ambient glow and bold monstera leaf styling.",
     tag: "LED Glow",
     image: "/monstera-led.png",
-    link: "https://makeshift-creations-co-2.myshopify.com/products/monstera-leaf-led-wall-light",
+    link: inquiryUrl,
     category: "LED Lights",
   },
   {
@@ -65,7 +67,7 @@ const bestSellers = [
     description: "A botanical-inspired 3 drawer storage box designed to organize desks, craft supplies, accessories, and everyday essentials.",
     tag: "Storage Pick",
     image: "/monstera-3drawer.png",
-    link: "https://makeshift-creations-co-2.myshopify.com/products/monstera-3-drawer-storage-box",
+    link: inquiryUrl,
     category: "Storage Boxes",
   },
   {
@@ -74,7 +76,7 @@ const bestSellers = [
     description: "A geometric honeycomb-inspired organizer designed to keep desks, tools, and everyday essentials clean and accessible.",
     tag: "Best Seller",
     image: "/honeycomb-tray.png",
-    link: "https://makeshift-creations-co-2.myshopify.com/products/honeycomb-desk-organizer-storage-tray?variant=54622070538612",
+    link: inquiryUrl,
     category: "3D Printed Trays",
   },
   {
@@ -83,7 +85,7 @@ const bestSellers = [
     description: "A celestial-inspired desk organizer designed for pens, tools, notes, and everyday essentials.",
     tag: "New Release",
     image: "/lunar-phase-organizer.png",
-    link: "https://8q9kqxr4pdprn8vg-99837706612.shopifypreview.com/products/lunar-phase-storage-box-organizer",
+    link: inquiryUrl,
     category: "Storage Boxes",
   },
   {
@@ -92,7 +94,7 @@ const bestSellers = [
     description: "A botanical-inspired organizer perfect for desks, accessories, pens, tools, and everyday essentials.",
     tag: "Decor Pick",
     image: "/monstera-organizer.png",
-    link: "https://makeshift-creations-co-2.myshopify.com/products/monstera-leaf-desk-organizer-amp-multi-purpose-holder?variant=54622126145908",
+    link: inquiryUrl,
     category: "3D Printed Trays",
   },
 ];
@@ -570,7 +572,7 @@ function App() {
                   rel="noopener noreferrer"
                   className="mt-10 inline-flex items-center justify-center gap-3 rounded-sm bg-white px-8 py-4 text-2xl font-black text-neutral-950 transition hover:bg-white/90"
                 >
-                  {selectedProduct.link.includes("formspace.club") ? "Start an Inquiry" : "Continue to Product"}
+                  Start an Inquiry
                   <ArrowRight size={22} />
                 </a>
               </div>
