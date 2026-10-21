@@ -33,6 +33,24 @@ const navItems = [
 
 const bestSellers = [
   {
+    name: "Pumpkin Pie Slice Earrings",
+    price: "$9.99",
+    description: "Playful pumpkin pie slice earrings with a dollop of whipped cream — a lightweight seasonal accessory for fall and Thanksgiving.",
+    tag: "Fall Favorite",
+    image: "/pumpkin-pie-earrings.png",
+    link: "https://formspace.club/f/7e253da8-1676-45cc-be5a-cd773efbbc45",
+    category: "Earrings",
+  },
+  {
+    name: "Christmas Tree Earrings",
+    price: "$9.99",
+    description: "Festive Christmas tree earrings with red ornaments and a bright yellow star — lightweight holiday style with handmade personality.",
+    tag: "Holiday Pick",
+    image: "/christmas-tree-earrings.png",
+    link: "https://formspace.club/f/7e253da8-1676-45cc-be5a-cd773efbbc45",
+    category: "Earrings",
+  },
+  {
     name: "Monstera Leaf LED Wall Light",
     price: "$15.00",
     description: "A tropical-inspired LED wall light with a soft ambient glow and bold monstera leaf styling.",
