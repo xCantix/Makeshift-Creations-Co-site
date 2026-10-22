@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Menu,
@@ -243,6 +243,55 @@ const services = [
   },
 ];
 
+const slugify = (value) => value
+  .toLowerCase()
+  .replace(/&/g, "and")
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-|-$/g, "");
+
+const pagePaths = {
+  home: "/",
+  creations: "/creations",
+  services: "/services",
+  process: "/process",
+  faq: "/faq",
+  gallery: "/gallery",
+  about: "/about",
+  contact: "/contact",
+};
+
+function pathForPage(page, context = {}) {
+  if (page === "category" && context.category) return `/creations/category/${slugify(context.category)}`;
+  if (page === "productDetail" && context.product) return `/creations/product/${slugify(context.product.name)}`;
+  if (page === "serviceDetail" && context.service) return `/services/${slugify(context.service.title)}`;
+  return pagePaths[page] || "/";
+}
+
+function resolveRoute(pathname) {
+  const path = pathname.replace(/\/+$/, "") || "/";
+  const productMatch = path.match(/^\/creations\/product\/([^/]+)$/);
+  const categoryMatch = path.match(/^\/creations\/category\/([^/]+)$/);
+  const serviceMatch = path.match(/^\/services\/([^/]+)$/);
+
+  if (productMatch) {
+    const product = bestSellers.find((item) => slugify(item.name) === productMatch[1]);
+    if (product) return { page: "productDetail", product, returnPage: "creations" };
+  }
+
+  if (categoryMatch) {
+    const category = categories.find((item) => slugify(item.title) === categoryMatch[1]);
+    if (category) return { page: "category", category: category.title };
+  }
+
+  if (serviceMatch) {
+    const service = services.find((item) => slugify(item.title) === serviceMatch[1]);
+    if (service) return { page: "serviceDetail", service };
+  }
+
+  const matchedPage = Object.entries(pagePaths).find(([, routePath]) => routePath === path)?.[0];
+  return { page: matchedPage || "home" };
+}
+
 function Header({ currentPage, setCurrentPage }) {
   const [open, setOpen] = useState(false);
 
@@ -267,7 +316,7 @@ function Header({ currentPage, setCurrentPage }) {
             <button
               key={item.label}
               onClick={() => navigate(item.page)}
-              className={`rounded-full px-3 py-2 text-sm font-semibold transition hover:bg-white/10 hover:text-white ${currentPage === item.page ? "bg-white/10 text-white" : "text-white/60"}`}
+              className={`rounded-full px-3 py-2 text-sm font-semibold transition hover:bg-white/10 hover:text-white ${(currentPage === item.page || (item.page === "creations" && ["category", "productDetail"].includes(currentPage)) || (item.page === "services" && currentPage === "serviceDetail")) ? "bg-white/10 text-white" : "text-white/60"}`}
             >
               {item.label}
             </button>
@@ -292,7 +341,7 @@ function Header({ currentPage, setCurrentPage }) {
               <button
                 key={item.label}
                 onClick={() => navigate(item.page)}
-                className={`rounded-xl px-4 py-3 text-left text-sm font-bold ${currentPage === item.page ? "bg-amber-300 text-neutral-950" : "bg-white/5 text-white/75"}`}
+                className={`rounded-xl px-4 py-3 text-left text-sm font-bold ${(currentPage === item.page || (item.page === "creations" && ["category", "productDetail"].includes(currentPage)) || (item.page === "services" && currentPage === "serviceDetail")) ? "bg-amber-300 text-neutral-950" : "bg-white/5 text-white/75"}`}
               >
                 {item.label}
               </button>
@@ -315,26 +364,50 @@ function SectionHeader({ eyebrow, title, text }) {
 }
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("home");
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedService, setSelectedService] = useState(null);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [productReturnPage, setProductReturnPage] = useState("creations");
+  const initialRoute = resolveRoute(window.location.pathname);
+  const [currentPage, setCurrentPageState] = useState(initialRoute.page);
+  const [selectedCategory, setSelectedCategory] = useState(initialRoute.category || null);
+  const [selectedService, setSelectedService] = useState(initialRoute.service || null);
+  const [selectedProduct, setSelectedProduct] = useState(initialRoute.product || null);
+  const [productReturnPage, setProductReturnPage] = useState(initialRoute.returnPage || "creations");
+
+  const applyRoute = (route) => {
+    setCurrentPageState(route.page);
+    setSelectedCategory(route.category || null);
+    setSelectedService(route.service || null);
+    setSelectedProduct(route.product || null);
+    if (route.returnPage) setProductReturnPage(route.returnPage);
+  };
+
+  const navigateTo = (page, context = {}, options = {}) => {
+    const path = pathForPage(page, context);
+    const currentDepth = window.history.state?.makeshiftDepth || 0;
+    const historyState = { makeshift: true, makeshiftDepth: options.replace ? currentDepth : currentDepth + 1 };
+    window.history[options.replace ? "replaceState" : "pushState"](historyState, "", path);
+    applyRoute({ page, ...context });
+  };
+
+  const setCurrentPage = (page) => navigateTo(page);
+
+  const navigateBack = (fallbackPage = "home") => {
+    if ((window.history.state?.makeshiftDepth || 0) > 0) {
+      window.history.back();
+    } else {
+      navigateTo(fallbackPage, {}, { replace: true });
+    }
+  };
 
   const openCategory = (categoryTitle) => {
-    setSelectedCategory(categoryTitle);
-    setCurrentPage("category");
+    navigateTo("category", { category: categoryTitle });
   };
 
   const openService = (service) => {
-    setSelectedService(service);
-    setCurrentPage("serviceDetail");
+    navigateTo("serviceDetail", { service });
   };
 
   const openProduct = (product, returnPage = currentPage) => {
-    setSelectedProduct(product);
     setProductReturnPage(returnPage);
-    setCurrentPage("productDetail");
+    navigateTo("productDetail", { product, returnPage });
   };
 
   const categoryProducts = bestSellers.filter((item) => item.category === selectedCategory);
@@ -347,6 +420,16 @@ function App() {
     document.body.scrollTop = 0;
     window.scrollTo(0, 0);
   }, [currentPage]);
+
+  useEffect(() => {
+    if (!window.history.state?.makeshift) {
+      window.history.replaceState({ makeshift: true, makeshiftDepth: 0 }, "", pathForPage(initialRoute.page, initialRoute));
+    }
+
+    const handlePopState = () => applyRoute(resolveRoute(window.location.pathname));
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   return (
     <main className="min-h-screen bg-neutral-950 text-white">
@@ -525,7 +608,7 @@ function App() {
             <div className="relative mb-12 border-b border-white/10 pb-10"><p className="text-xs font-black uppercase tracking-[0.3em] text-amber-300/70">Shop category</p><h1 className="brand-type mt-4 text-5xl font-black md:text-7xl">{selectedCategory || "Products"}</h1><p className="mt-4 text-lg text-white/60">Browse what’s currently on the workbench in this collection.</p></div>
             <div className="relative mb-10 flex justify-start">
               <button
-                onClick={() => setCurrentPage("creations")}
+                onClick={() => navigateBack("creations")}
                 className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-black text-white transition hover:bg-white hover:text-neutral-950"
               >
                 ← Back
@@ -557,7 +640,7 @@ function App() {
             <div className="relative mb-8 flex items-center gap-3 text-sm font-bold text-white/45">
               <button onClick={() => setCurrentPage("creations")} className="transition hover:text-amber-300">Creations</button>
               <span>/</span>
-              <button onClick={() => { setSelectedCategory(selectedProduct.category); setCurrentPage("category"); }} className="transition hover:text-amber-300">{selectedProduct.category}</button>
+              <button onClick={() => openCategory(selectedProduct.category)} className="transition hover:text-amber-300">{selectedProduct.category}</button>
               <span className="hidden sm:inline">/</span>
               <span className="hidden truncate text-white/70 sm:inline">{selectedProduct.name}</span>
             </div>
@@ -573,7 +656,7 @@ function App() {
                   />
                 </div>
                 <button
-                  onClick={() => setCurrentPage(productReturnPage)}
+                  onClick={() => navigateBack(productReturnPage)}
                   className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-white hover:text-neutral-950"
                 >
                   ← Back to browsing
@@ -688,7 +771,7 @@ function App() {
           <div className="mx-auto max-w-7xl">
             <div className="mb-10 flex justify-start">
               <button
-                onClick={() => setCurrentPage("services")}
+                onClick={() => navigateBack("services")}
                 className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-black text-white transition hover:bg-white hover:text-neutral-950"
               >
                 ← Back
